@@ -1,39 +1,28 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Apis, { authApi, endpoints } from "../configs/Api";
 import React from "react";
-export default function RegisterShiper(){
-    const [CMND,setCMND] = useState([])
+export default function Shipper(){
     
     
-    const addShipper = async (event) =>{
-
-        event.preventDefault()
-        const res = await authApi().post(endpoints['register-shipper'],{
-            'identity_number': CMND,
-        })
-        console.log(res.data)
-        
-        setCMND('')
-    }
     
-    
-
 
     return(
         <>
-        <h1 className="text-center text-danger">Dang Ky Shiper</h1>
-        <Form onSubmit={addShipper}>
-        <Form.Group className="mb-3" controlId="CMND">
-        <Form.Label>CMND</Form.Label>
-        <Form.Control type="text" 
-                      value={CMND}
-                      onChange={(event) =>{ setCMND(event.target.value )}}/>
-        </Form.Group>
-            <Button variant="primary" type="submit">
-                Dang ky
-            </Button>
-        </Form>
+        <Container style={{ borderRadius:'10px', border: "1", borderStyle: 'solid', height: '40px'}}>
+        <Row>
+        
+        <Col xs={12} md={2}>
+          xs=12 md=8
+        </Col>
+        <Col md={8}>
+            ss
+        </Col>
+        <Col xs={6} md={2}>
+          xs=6 md=4
+        </Col>
+      </Row>
+        </Container>
         </>
     )
 

@@ -1,12 +1,26 @@
 import React from "react"
 import { Form, Button, Container, Col, Figure, Image,  } from 'react-bootstrap'
-import Item from "../Item.js"
 import Banners from '../../image/banner.jpg'
 import { Link } from "react-router-dom"
 import ProductItem from "../ProductItem.js"
+import { useEffect } from "react"
+import Apis, { authApi,endpoints } from "../../configs/Api.js"
+import { useState } from "react"
 const HomePage = () => {
 
+    const [products, setProducts] = useState([])
+    useEffect(() => {
+        const loadProducts = async () => {
+            
+           
+            const res = await authApi().get(endpoints['products'])
+            setProducts(res.data)
+            
+            console.log(products)
+        }
 
+        loadProducts()
+    }, [])
 
 
     return (
@@ -24,7 +38,7 @@ const HomePage = () => {
                         <Form  >
                         <Link to='/' className="nav-link">
                         <Button variant="success" type="submit" className="btn-banner ">
-                        Oder
+                        Order
                         </Button>
                         </Link>
                    
@@ -36,13 +50,10 @@ const HomePage = () => {
             </div>
             <h1 className="text-aglin text-center" >Product</h1>
             <div className="item-container"  >
-                <ProductItem/>
-                <ProductItem/>
-                <ProductItem/>
-                <ProductItem/>
-                <ProductItem/>
-                <ProductItem/>
-                <ProductItem/><ProductItem/><ProductItem/><ProductItem/><ProductItem/>
+                    {products.map(c => {
+                            return <ProductItem id={c.id}  image={c['image']} name={c['name']} price={c.price} />
+                        })}
+               
             </div>
         </>
     )

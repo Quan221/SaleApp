@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { Form, Button, Container, Col, Figure,  } from 'react-bootstrap'
+import { Form, Button, Container, Col, Figure, } from 'react-bootstrap'
 import { Link, Navigate } from 'react-router-dom'
 import { UserContext } from '../App'
-import Apis, {endpoints, authApi} from '../configs/Api.js'
-import cookie from 'react-cookies'
+import Apis, { endpoints, authApi } from '../configs/Api.js'
+import cookies from 'react-cookies'
 import "../App.css"
 import "../image/Loginscreen.jpg"
+import axios from 'axios'
 
 
 
@@ -15,23 +16,31 @@ const Login = () => {
     const [user, dispatch] = useContext(UserContext)
 
     const login = async (evt) => {
-        evt.preventDefault() 
-         
-        const res = await Apis.post(endpoints['login'], {
-            'username': username,
-            'password': password,
-            'client_id': 'O9x3mwVEWHyXxDnseZh4SZw1mEGtTosyr5cItGSW',
-            'client_secret': 'VGltontOQwJ8Aizu4qmRYFfWMvTSHCWjUAZUTUHhD8EYSt3n50kO9phSZS0DCB54j39lG2DDZh6lJbCKkS5bj1ZQl6NTDoyh67KBL1IDL57x1qTwdZaZ2YGXByIeDMSD',
-            'grant_type': 'password'
+        evt.preventDefault()
+
+
+        const formData = new FormData()
+        formData.append("password", password)
+        formData.append("username", username)
+        formData.append("client_id", 'O9x3mwVEWHyXxDnseZh4SZw1mEGtTosyr5cItGSW')
+        formData.append("client_secret", 'VGltontOQwJ8Aizu4qmRYFfWMvTSHCWjUAZUTUHhD8EYSt3n50kO9phSZS0DCB54j39lG2DDZh6lJbCKkS5bj1ZQl6NTDoyh67KBL1IDL57x1qTwdZaZ2YGXByIeDMSD')
+        formData.append("grant_type", 'password')
+        const res = await Apis.post(endpoints['login'], formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+
         })
 
         // console.info(res.data)
-        // cookies.save('token', res.data.access_token)
-        cookie.remove('userToken', { path: '/' })
-        console.log(cookie.load('userToken'))
-        cookie.save('userToken', res.data.access_token, { path: '/' })
-       
-        
+        // cookies.save('userToken', res.data.access_token)
+        // cookie.remove('userToken', { path: '/' })
+        // console.log(cookie.load('userToken'))
+        // cookie.save('userToken', res.data.access_token, { path: '/' })
+        localStorage.setItem('userToken', res.data.access_token)
+
+
+
         const user = await authApi().get(endpoints['current-user'])
         console.info(user.data)
         dispatch({
@@ -42,49 +51,49 @@ const Login = () => {
 
 
     if (user != null)
-        return <Navigate to="/" />
-    return(
+        return <Navigate to="/homepage" />
+    return (
         <>
-        {/* <Figure>
+            {/* <Figure>
                 <Figure.Image 
                   width={171}
                   height={180}
                   src="../image/Loginscreen.jpg"/>
         </Figure> */}
-        {/* <Container className='bg_image' ></Container> */}
-        <div className='bg_image'/>
-        <div  className="sign-up-container form form-container">
-        <Container >
-        
-        
-            <h1 className="text-center text-success">Log in</h1>
-            <Col >
-            <Form   onSubmit={login}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    {/* <Form.Label>Username</Form.Label> */}
-                    <Form.Control type="text" 
-                        value={username} 
-                        onChange={(evt) => setUsername(evt.target.value)}
-                        placeholder="Nhap username" 
-                        required/>
-                </Form.Group>
+            {/* <Container className='bg_image' ></Container> */}
+            <div className='bg_image' />
+            <div className="sign-up-container form form-container">
+                <Container >
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    {/* <Form.Label>Password</Form.Label> */}
-                    <Form.Control type="password" 
-                            value={password} 
-                            onChange={(evt) => setPassword(evt.target.value)}
-                            placeholder="Password" required />
-                </Form.Group>
-                <Button variant="success" type="submit" className="button ">
-                   <Link to="/" className='nav-link' >Login</Link>
-                </Button>
-               <Link to="/register" className=' btn-register'  variant="success" >Dang ky</Link>
-            </Form>
-            </Col>
-        </Container>
-        </div>
-       
+
+                    <h1 className="text-center text-success">Log in</h1>
+                    <Col >
+                        <Form onSubmit={login}>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                {/* <Form.Label>Username</Form.Label> */}
+                                <Form.Control type="text"
+                                    value={username}
+                                    onChange={(evt) => setUsername(evt.target.value)}
+                                    placeholder="Nhap username"
+                                    required />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                {/* <Form.Label>Password</Form.Label> */}
+                                <Form.Control type="password"
+                                    value={password}
+                                    onChange={(evt) => setPassword(evt.target.value)}
+                                    placeholder="Password" required />
+                            </Form.Group>
+                            <Button variant="success" type="submit" className="button ">
+                                <Link to="/homepage" className='nav-link' >Login</Link>
+                            </Button>
+                            <Link to="/register" className=' btn-register' variant="success" >Dang ky</Link>
+                        </Form>
+                    </Col>
+                </Container>
+            </div>
+
         </>
     )
 }
