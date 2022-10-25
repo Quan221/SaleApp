@@ -40,7 +40,8 @@ export default function OrderList() {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th>order </th>
+                                    <th colSpan={3} style={{ textAlign: "center" }}  >order: {c.status} </th>
+                                    {/* <th>{c.status}</th> */}
                                 </tr>
                             </thead>
                             {c.item.map(d => {
@@ -52,7 +53,9 @@ export default function OrderList() {
 
                                         <tr>
 
-                                            <td colSpan={2}><span>{d.name} x {d.quantity}</span></td>
+                                            <td ><span>{d.name} x {d.quantity}</span></td>
+                                            <td>Iphone3</td>
+
                                             <td>{d.sum}</td>
 
                                         </tr>

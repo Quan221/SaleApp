@@ -26,11 +26,19 @@ export const UserContext = createContext()
 function App() {
 
   const [user, dispatch] = useReducer(myReducer)
+  let btn = <>
+
+  </>
+  if (user != null) {
+    btn = <>
+      <Header />
+    </>
+  }
   return (
     <BrowserRouter>
       <UserContext.Provider value={[user, dispatch]} >
         <StateContext>
-          <Header />
+          {btn}
           {/* <RegisterShiper/> */}
           <Routes>
 

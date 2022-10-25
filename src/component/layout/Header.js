@@ -42,25 +42,40 @@ function Header() {
     localStorage.clear()
   }
 
-  if (user != null && user.role == "Customer") {
-    btn = <>
-      <div style={{ marginTop: '8px' }} > {user.username}</div>
-      <Link to='/' onClick={logout} > <button className='btn-logout'  > Log out</button></Link>
-      <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
-        <AiOutlineShopping />
-        <span className="cart-item-qty">{totalQuantities}</span>
-      </button>
+  if (user != null) {
+    if (user.role == "Customer") {
 
-      {showCart && <CartItem />}
+      btn = <>
+        <div style={{ marginTop: '8px' }} > {user.username}</div>
+        <Link to='/' onClick={logout} > <button className='btn-logout'  > Log out</button></Link>
+        <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
+          <AiOutlineShopping />
+          <span className="cart-item-qty">{totalQuantities}</span>
+        </button>
 
-    </>
-    btn2 = <>
-      <Link to='/homepage' className='nav-link' >Home</Link>
-      <Link to='/order' className='nav-link' >Order</Link>
-      <Link to='/addorders' className='nav-link' >Add Order</Link>
+        {showCart && <CartItem />}
 
-    </>
+      </>
+      btn2 = <>
+        <Link to='/homepage' className='nav-link' >Home</Link>
+        <Link to='/order' className='nav-link' >Order</Link>
+        <Link to='/addorders' className='nav-link' >Add Order</Link>
+
+      </>
+    }
+    else {
+      btn = <>
+        <div style={{ marginTop: '8px' }} > {user.username}</div>
+        <Link to='/' onClick={logout} > <button className='btn-logout'  > Log out</button></Link>
+
+      </>
+      btn2 = <>
+        <Link to='/shipper' className='nav-link' >Order List</Link>
+      </>
+
+    }
   }
+
 
   const HoverText = styled.p`
              color: #000;

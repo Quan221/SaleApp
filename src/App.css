@@ -130,7 +130,7 @@
   
     } */
 .form-container {
-  width: 400px;
+  width: 550px;
   height: 400px;
 
 
@@ -179,7 +179,7 @@
 }
 
 .login-screen {
-  left: 0px;
+  /* left: 0px; */
 
 }
 

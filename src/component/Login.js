@@ -86,7 +86,7 @@ const Login = () => {
                                     placeholder="Password" required />
                             </Form.Group>
                             <Button variant="success" type="submit" className="button ">
-                                <Link to="/homepage" className='nav-link' >Login</Link>
+                                Login
                             </Button>
                             <Link to="/register" className=' btn-register' variant="success" >Dang ky</Link>
                         </Form>

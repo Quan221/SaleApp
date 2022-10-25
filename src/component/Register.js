@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import { Button, Form,Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Button, Form, Container } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import Apis, { endpoints } from "../configs/Api";
 import axios from "axios";
@@ -14,17 +14,17 @@ export default function Register() {
     const [email, setEmail] = useState(null)
     const avatar = useRef()
     const nav = useNavigate()
-    const goToLogin =(event)=>{
-        
-       {
-        nav(`/login`)
-       }
+    const goToLogin = (event) => {
+
+        {
+            nav(`/`)
+        }
 
     }
 
     const register = (event) => {
         event.preventDefault()
-        
+
         let registerUser = async () => {
             const formData = new FormData()
             formData.append("first_name", firstName)
@@ -42,8 +42,8 @@ export default function Register() {
                     }
 
                 })
-               
-                
+
+
             } catch (err) {
                 console.error(err)
             }
@@ -53,47 +53,48 @@ export default function Register() {
             //     data :formData
 
             // })
-            
+
         }
 
         if (password !== null && password === confirmPassword) {
-            registerUser() 
-            // goToLogin()
-            
+            registerUser()
+            goToLogin()
+
         }
     }
 
 
     return (
         <Container>
-        <h1 className="text-center text-success">DANG KY NGUOI DUNG</h1>
-        <Form onSubmit={register}>
-            <RegisterForm id="firstName" label="First Name" 
-                          type="text" value={firstName}
-                          change={(event) => setFirstName(event.target.value)}  />
-            <RegisterForm id="lastName" label="Last Name" 
-                          type="text" value={lastName}
-                          change={(event) => setLastName(event.target.value)}  />
-            <RegisterForm id="email" label="Email" 
-                          type="email" value={email}
-                          change={(event) => setEmail(event.target.value)}  />
-            <RegisterForm id="username" label="Username" 
-                          type="text" value={username}
-                          change={(event) => setUsername(event.target.value)}  />
-            <RegisterForm id="password" label="Password" 
-                          type="password" value={password}
-                          change={(event) => setPassword(event.target.value)}  />
-            <RegisterForm id="confirm" label="Confirm Password" 
-                          type="password" value={confirmPassword}
-                          change={(event) => setConfirmPassword(event.target.value)}  />              
-            <Form.Group className="mb-3" controlId="avatar">
-                <Form.Label>Avatar</Form.Label>
-                <Form.Control type="file" ref={avatar} className="form-control" />
-            </Form.Group>
-            
-              <Button variant="primary" type="submit" >
-                Dang ky
-              </Button>
+            <h1 className="text-center text-success">DANG KY NGUOI DUNG</h1>
+            <Form onSubmit={register}>
+                <RegisterForm id="firstName" label="First Name"
+                    type="text" value={firstName}
+                    change={(event) => setFirstName(event.target.value)} />
+                <RegisterForm id="lastName" label="Last Name"
+                    type="text" value={lastName}
+                    change={(event) => setLastName(event.target.value)} />
+                <RegisterForm id="email" label="Email"
+                    type="email" value={email}
+                    change={(event) => setEmail(event.target.value)} />
+                <RegisterForm id="username" label="Username"
+                    type="text" value={username}
+                    change={(event) => setUsername(event.target.value)} />
+                <RegisterForm id="password" label="Password"
+                    type="password" value={password}
+                    change={(event) => setPassword(event.target.value)} />
+                <RegisterForm id="confirm" label="Confirm Password"
+                    type="password" value={confirmPassword}
+                    change={(event) => setConfirmPassword(event.target.value)} />
+                <Form.Group className="mb-3" controlId="avatar">
+                    <Form.Label>Avatar</Form.Label>
+                    <Form.Control type="file" ref={avatar} className="form-control" />
+                </Form.Group>
+
+                <Button variant="primary" type="submit" style={{ marginLeft: '450px', marginBottom: '40px', marginTop: '0' }} >
+
+                </Button>
+
             </Form>
         </Container>
     )
@@ -101,11 +102,11 @@ export default function Register() {
 
 function RegisterForm(props) {
     return (
-    <Form.Group className="mb-3" controlId={props.id}>
-        <Form.Label>{props.label}</Form.Label>
-        <Form.Control type={props.type} 
-                      value={props.value}
-                      onChange={props.change} />
-    </Form.Group>
-  )
+        <Form.Group className="mb-3" controlId={props.id}>
+            <Form.Label>{props.label}</Form.Label>
+            <Form.Control type={props.type}
+                value={props.value}
+                onChange={props.change} />
+        </Form.Group>
+    )
 } 
