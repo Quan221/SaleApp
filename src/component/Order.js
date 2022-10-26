@@ -53,8 +53,8 @@ export default function OrderList() {
 
                                         <tr>
 
-                                            <td ><span>{d.name} x {d.quantity}</span></td>
-                                            <td>Iphone3</td>
+                                            <td ><span>{d.product.name} </span></td>
+                                            <td> x {d.quantity}</td>
 
                                             <td>{d.sum}</td>
 

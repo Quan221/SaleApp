@@ -7,6 +7,7 @@ import { useEffect } from "react"
 import Apis, { authApi, endpoints } from "../../configs/Api.js"
 import { useState } from "react"
 import { UserContext } from "../../App"
+import { Toaster } from "react-hot-toast"
 const HomePage = () => {
     const [user, dispatch] = useContext(UserContext)
     const [products, setProducts] = useState([])
@@ -32,7 +33,9 @@ const HomePage = () => {
                 return <ProductItem id={c.id} image={c['image']} name={c['name']} price={c.price} />
             })}
 
-        </div></>
+        </div>
+        <Toaster />
+    </>
 
     if (user != null && user.role == "Shipper") {
         content = <></>

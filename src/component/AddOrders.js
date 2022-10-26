@@ -18,7 +18,7 @@ import Category from "./Category";
 
 export default function AddOrder() {
     const [address, setAddress] = useState()
-    const { cartItems, setCartItems, setTotalQuantities } = useStateContext()
+    const { cartItems, setCartItems, setTotalQuantities, setTotalPrice } = useStateContext()
     const Addorders = (event) => {
         event.preventDefault()
 
@@ -59,6 +59,7 @@ export default function AddOrder() {
             setAddress('')
             setCartItems([])
             setTotalQuantities(0)
+            setTotalPrice(0)
 
 
         }
@@ -69,37 +70,50 @@ export default function AddOrder() {
 
 
     }
+    let body = <>
+        <h1 style={{ textAlign: 'center' }} >Chua co don hang</h1>
+
+
+
+    </>
+    if (cartItems.length > 0) {
+        body = <>
+
+            <Container>
+                <div style={{ margin: '5px', display: "flex", width: '100%', flexWrap: 'wrap', }} >
+                    {cartItems.map(c => {
+                        return <Category id={c.id} image={c['image']} name={c['name']} price={c.price} title={c.title} quantity={c.quantity} />
+                    })}
+                </div>
+                <div className="add-address"  >
+                    <InputGroup size="sm" className="mb-3" style={{ margin: "10px", width: "80%" }}>
+                        <InputGroup.Text id="inputGroup-sizing-sm">Nhap Dia Chi</InputGroup.Text>
+                        <Form.Control
+                            aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm"
+                            type="text"
+                            value={address}
+                            onChange={(event) => setAddress(event.target.value)}
+                        />
+                    </InputGroup>
+                    <button onClick={Addorders} >Dang ky</button>
+
+
+                </div>
+
+
+            </Container>
+
+        </>
+    }
+
 
 
     return (
-        <Container>
-            {/* <Form onSubmit={Addorders}> */}
-            {/* <Button variant="primary" type='submit' >Accept</Button>  */}
-
-            {/* </Form> */}
-            <div style={{ margin: '5px', display: "flex", width: '100%', flexWrap: 'wrap', }} >
-                {cartItems.map(c => {
-                    return <Category id={c.id} image={c['image']} name={c['name']} price={c.price} title={c.title} quantity={c.quantity} />
-                })}
-            </div>
-            <div className="add-address"  >
-                <InputGroup size="sm" className="mb-3" style={{ margin: "10px", width: "80%" }}>
-                    <InputGroup.Text id="inputGroup-sizing-sm">Nhap Dia Chi</InputGroup.Text>
-                    <Form.Control
-                        aria-label="Small"
-                        aria-describedby="inputGroup-sizing-sm"
-                        type="text"
-                        value={address}
-                        onChange={(event) => setAddress(event.target.value)}
-                    />
-                </InputGroup>
-                <button onClick={Addorders} >Dang ky</button>
-                <Toaster />
-
-            </div>
-
-
-        </Container>
+        <>
+            {body}
+            <Toaster />
+        </>
     )
 }
 
