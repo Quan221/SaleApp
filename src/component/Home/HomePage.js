@@ -26,15 +26,21 @@ const HomePage = () => {
             console.log(res.data)
 
         }
+
+        loadProducts()
+
+    }, [])
+    useEffect(() => {
         const loadCategories = async () => {
             const res2 = await authApi().get(endpoints['categories'])
             console.log(res2.data)
             setCategories(res2.data)
         }
 
-        loadProducts()
         loadCategories()
+
     }, [])
+
 
     const prevPage = async () => {
         if (pre) {
@@ -68,20 +74,24 @@ const HomePage = () => {
         }
 
     }
-    const getCategories = async () => {
-        let res3 = await authApi().get((endpoints['getProductByCate'](categories.id)))
+
+    const getCategories = async (id) => {
+        let res3 = await authApi().get((endpoints['getProductByCate'](id)))
         setProducts(res3.data)
 
     }
 
 
+
+
+
     let content = <>
 
-        <h1 className="text-aglin text-center" >Product</h1>
+        <h1 className="text-aglin text-center" >Danh sách sản phẩm</h1>
         <Container>
             <div style={{ display: 'flex' }} >
                 {categories.map(c => {
-                    return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={getCategories()} >{c.name}</Button>)
+                    return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={() => getCategories(c.id)} >{c.name}</Button>)
                 })}
 
 
