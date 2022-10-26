@@ -7,32 +7,81 @@ import { useEffect } from "react"
 import Apis, { authApi, endpoints } from "../../configs/Api.js"
 import { useState } from "react"
 import { UserContext } from "../../App"
+import axios from "axios"
 const HomePage = () => {
     const [user, dispatch] = useContext(UserContext)
     const [products, setProducts] = useState([])
+    const [next, setNext] = useState()
+    const [pre, setPre] = useState()
     useEffect(() => {
         const loadProducts = async () => {
 
 
             const res = await authApi().get(endpoints['products'])
-            setProducts(res.data)
+            setProducts(res.data.results)
+            setNext(res.data.next)
+            setPre(res.data.pre)
+            console.log(res.data)
 
-            console.log(products)
         }
 
         loadProducts()
     }, [])
 
+    const prevPage = async () => {
+        await axios.get(pre)
+            .then((res) => {
+                console.log(res.data);
+                setProducts(res.data.results)
+                setNext(res.data.next)
+                setPre(res.data.previous)
+
+
+            })
+    }
+
+    const nextPage = async () => {
+        await axios.get(next)
+            .then((res) => {
+                console.log(res.data);
+                setProducts(res.data.results)
+                setNext(res.data.next)
+                setPre(res.data.previous)
+
+
+            })
+
+    }
+
 
     let content = <>
 
         <h1 className="text-aglin text-center" >Product</h1>
+        <Container>
+            <Button
+                className="success"
+                onClick={() => prevPage()}
+
+
+            >
+                Prev
+            </Button>
+            <Button
+                className="success"
+                onClick={() => nextPage()}
+            >
+                Next
+            </Button>
+
+        </Container>
+
         <div className="item-container"  >
             {products.map(c => {
                 return <ProductItem id={c.id} image={c['image']} name={c['name']} price={c.price} />
             })}
 
         </div></>
+
 
     if (user != null && user.role == "Shipper") {
         content = <></>
