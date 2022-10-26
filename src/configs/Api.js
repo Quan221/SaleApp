@@ -16,6 +16,8 @@ export let endpoints = {
     'my-orders': '/orders/my-orders/',
     "list-orders": '/shippers/orders/',
     "changeStatus": (orderId) => `/orders/${orderId}/change-status/`,
+    "categories": '/categories/',
+    "getProductByCate": (cateId) => `/categories/${cateId}/products/`,
 
 
 

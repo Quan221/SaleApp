@@ -7,35 +7,107 @@ import { useEffect } from "react"
 import Apis, { authApi, endpoints } from "../../configs/Api.js"
 import { useState } from "react"
 import { UserContext } from "../../App"
-import { Toaster } from "react-hot-toast"
+import axios from "axios"
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai"
 const HomePage = () => {
     const [user, dispatch] = useContext(UserContext)
     const [products, setProducts] = useState([])
+    const [next, setNext] = useState()
+    const [pre, setPre] = useState()
+    const [categories, setCategories] = useState([])
     useEffect(() => {
         const loadProducts = async () => {
 
 
             const res = await authApi().get(endpoints['products'])
-            setProducts(res.data)
+            setProducts(res.data.results)
+            setNext(res.data.next)
+            setPre(res.data.pre)
+            console.log(res.data)
 
-            console.log(products)
+        }
+        const loadCategories = async () => {
+            const res2 = await authApi().get(endpoints['categories'])
+            console.log(res2.data)
+            setCategories(res2.data)
         }
 
         loadProducts()
+        loadCategories()
     }, [])
+
+    const prevPage = async () => {
+        if (pre) {
+            await axios.get(pre)
+                .then((res) => {
+                    console.log(res.data);
+                    setProducts(res.data.results)
+                    setNext(res.data.next)
+                    setPre(res.data.previous)
+
+
+                })
+
+        }
+
+    }
+
+    const nextPage = async () => {
+        if (next) {
+            await axios.get(next)
+                .then((res) => {
+                    console.log(res.data);
+                    setProducts(res.data.results)
+                    setNext(res.data.next)
+                    setPre(res.data.previous)
+
+
+                })
+
+
+        }
+
+    }
+    const getCategories = async () => {
+        let res3 = await authApi().get((endpoints['getProductByCate'](categories.id)))
+        setProducts(res3.data)
+
+    }
 
 
     let content = <>
 
         <h1 className="text-aglin text-center" >Product</h1>
+        <Container>
+            <div style={{ display: 'flex' }} >
+                {categories.map(c => {
+                    return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={getCategories()} >{c.name}</Button>)
+                })}
+
+
+            </div>
+        </Container>
+        <Container >
+            <div style={{ textAlign: 'center' }} >
+                <AiOutlineDoubleLeft onClick={() => prevPage()} style={{ cursor: 'pointer' }} >
+
+                </AiOutlineDoubleLeft>
+
+
+                <AiOutlineDoubleRight onClick={() => nextPage()} style={{ cursor: 'pointer' }} >
+
+                </AiOutlineDoubleRight>
+            </div>
+
+        </Container>
+
         <div className="item-container"  >
             {products.map(c => {
                 return <ProductItem id={c.id} image={c['image']} name={c['name']} price={c.price} />
             })}
 
-        </div>
-        <Toaster />
-    </>
+        </div></>
+
 
     if (user != null && user.role == "Shipper") {
         content = <></>
@@ -69,12 +141,7 @@ const HomePage = () => {
 
 }
 export default HomePage;
-// const item = () =>{
+function getProduct(props) {
 
 
-//     return(
-
-//         pass
-
-//     )
-// }
+}

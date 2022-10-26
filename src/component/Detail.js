@@ -12,26 +12,30 @@ import Api, { authApi, endpoints } from "../configs/Api";
 import { Toaster } from "react-hot-toast";
 const Detail = () => {
     const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
-    const [detail, setDetail] = useState([])
+    const [detail, setDetail] = useState({})
     const { productsId } = useParams()
 
     useEffect(() => {
         const loadDetail = async () => {
 
             let res = await Api.get((endpoints['products-detail'](productsId)))
+            res.data.price = res.data.price.toLocaleString('en-US')
             setDetail(res.data)
             console.log(res.data)
+
 
         }
 
         loadDetail()
 
     }, [])
+
     return (
         <>
             <div className="detail" >
                 <div className="detail-left">
                     <div className="detail-image" >
+
                         <Image src={detail.image} style={{ width: '408px', height: '464px' }} />
                     </div>
 
@@ -50,7 +54,9 @@ const Detail = () => {
                     {/* <h3 style={{marginLeft:'125px'}} >Be Friend</h3> */}
                     <div style={{ width: '420px', height: '418px', marginLeft: '250px', display: 'block', padding: '3px', position: "absolute", left: "600px", top: "353px" }}>
                         <div>
-                            <span className="content" >{detail.title}</span>
+
+                            <h2 style={{ color: 'red' }} >Đặc Điểm Nổi Bật :  <br /></h2>
+                            <span className="content" ><br />  {detail.description}</span>
                         </div>
                         <div className="quantity">
                             <h4>Quantity:</h4>
@@ -60,9 +66,13 @@ const Detail = () => {
                                 <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
                             </p>
                         </div>
+                        <div style={{ justifyContent: 'space-between', display: 'flex' }} >
+                            <div><p>Price : </p></div>
+                            <div><p>{detail.price} VND</p></div>
+                        </div>
 
 
-                        <Button style={{ position: 'absolute', bottom: "10%", width: "392px", height: "48px" }} variant="success" onClick={() => onAdd(detail, qty)} >AddToCard</Button>
+                        <Button style={{ width: "392px", height: "48px", margin: '10px' }} variant="success" onClick={() => onAdd(detail, qty)} >AddToCard</Button>
 
 
                     </div>

@@ -8,21 +8,22 @@ const Category = (props) => {
     return (
 
 
-        
-            <div className="bill" >
-                <div className="content-category">
-                <h1 style={{verticalAlign: "top" }}>{props.name} x {props.quantity}</h1>
-                <p style={{paddingLeft: "50px"  }} >{props.title}</p>
+
+        <div className="bill" >
+            <div className="content-category">
+                <h1 style={{ verticalAlign: "top" }}>{props.name}</h1>
+                <h2 style={{ paddingLeft: "10px" }} >Số Lượng : {props.quantity}</h2>
+                <br />
                 <div className="price-bill" >
-                <h3>Price </h3>
-                <h3 style={{paddingLeft: "50px"  }}>{props.price} d </h3>
-                </div>
-                </div>
-                <div  className='img-category'>
-                    <Image src={props.image} style={{width: '300px', height: '200px', paddingRight: '5px'}}/>
+                    <h3>Price </h3>
+                    <h3 >{props.price} d </h3>
                 </div>
             </div>
-       
+            <div className='img-category'>
+                <Image src={props.image} style={{ width: '300px', height: '200px', paddingRight: '5px' }} />
+            </div>
+        </div>
+
     )
 }
-export default Category ;
+export default Category;

@@ -11,21 +11,22 @@ const ProductItem = (props) => {
 
 
   // }
+  const formatPrice = (props.price).toLocaleString('en-US');
   return (
-    
-      <Link to={`/products/${props.id}`} className= 'nav-link' >
-        <div className="item-card">
-          <img 
-            src={props.image}
-            width={300}
-            height={250}
-            className="item-image"
-          />
-          <p style={{fontWeight: '600px',}}>{props.name}</p>
-          <p style={{fontWeight: '850px', marginTop: '0px', color : 'blue'}}>{props.price}</p>
-        </div>
-      </Link>
-    
+
+    <Link to={`/products/${props.id}`} className='nav-link' >
+      <div className="item-card">
+        <img
+          src={props.image}
+          width={300}
+          height={250}
+          className="item-image"
+        />
+        <p style={{ fontWeight: '650px', }}>{props.name}</p>
+        <p style={{ fontWeight: '850px', marginTop: '0px', color: 'blue' }}>{formatPrice}</p>
+      </div>
+    </Link>
+
   )
 }
 
