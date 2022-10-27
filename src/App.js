@@ -70,6 +70,7 @@ function App() {
               <Route path='/addorders' element={<AddOrders />} />
               <Route path='/order' element={<OrderList />} />
               <Route path='/shipper' element={<Shipper />} />
+              <Route path='/category' element={<Category />} />
 
 
 

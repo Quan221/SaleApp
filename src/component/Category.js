@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Image } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import Test from "../image/t_m_18.png";
+import Table from 'react-bootstrap/Table';
 
 const Category = (props) => {
 
@@ -8,21 +9,35 @@ const Category = (props) => {
     return (
 
 
+        <Container>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Tồng tiền</th>
+                        <th>Hình ảnh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{props.name}</td>
+                        <td>{props.quantity}</td>
+                        <td>{props.price}</td>
+                        <td><img style={{
+                            width: '100px',
+                            height: '50px',
+                            verticalAlign: 'middle',
+                        }} src={props.image} alt="Avatar" class="avatar" />
+                        </td>
+                    </tr>
 
-        <div className="bill" >
-            <div className="content-category">
-                <h1 style={{ verticalAlign: "top" }}>{props.name}</h1>
-                <h2 style={{ paddingLeft: "10px" }} >Số Lượng : {props.quantity}</h2>
-                <br />
-                <div className="price-bill" >
-                    <h3>Price </h3>
-                    <h3 >{props.price} VNĐ </h3>
-                </div>
-            </div>
-            <div className='img-category'>
-                <Image src={props.image} style={{ width: '300px', height: '200px', paddingRight: '5px' }} />
-            </div>
-        </div>
+                </tbody>
+
+            </Table>
+        </Container>
+
+
 
     )
 }

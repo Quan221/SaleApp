@@ -27,7 +27,7 @@ export default function OrderList() {
     return (
 
         <>
-            <h1 style={{ verticalAlign: 'text-top', textAlign: 'center' }} > Danh Sach Don Hang</h1>
+            <h1 style={{ verticalAlign: 'text-top', textAlign: 'center' }} > Đơn hàng của tôi </h1>
             {/* {myOrder.map(h => {
                 return (
                     <h1>{h.item.id}</h1>

@@ -124,9 +124,7 @@ const HomePage = () => {
                         <h2 className="h2-banner">2hr delivery promise</h2>
                         <Form  >
                             <Link to='/' className="nav-link">
-                                <Button variant="success" type="submit" className="btn-banner ">
-                                    Order
-                                </Button>
+
                             </Link>
 
                         </Form>

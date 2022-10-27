@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Button, FormControl, InputGroup, Form, Container, Toast, Alert } from "react-bootstrap";
+import { Button, FormControl, InputGroup, Form, Container, Toast, Alert, Row, Col } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { authApi, endpoints } from "../configs/Api";
 import { useStateContext } from "../reducer/StateContext";
@@ -21,59 +21,54 @@ import Payment from "./Payment";
 export default function AddOrder() {
     const [address, setAddress] = useState()
     const { cartItems, setCartItems, setTotalQuantities, setTotalPrice, totalPrice } = useStateContext()
-    const [checkout, setCheckOut] = useState(false);
     const price = (parseFloat(totalPrice) / 24000).toFixed(2)
-    const Addorders = (event) => {
-        event.preventDefault()
 
 
-        let AddOder = async () => {
-            const formData = new FormData()
-            formData.append("ship_address", address)
-            try {
-                const res = await authApi().post(endpoints['addorder'], formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                })
 
-                cartItems.map(c => {
+    let AddOrder = async () => {
+        const formData = new FormData()
+        formData.append("ship_address", address)
+        try {
+            const res = await authApi().post(endpoints['addorder'], formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
 
-                    let AddItem = async () => {
-                        const formData2 = new FormData()
-                        formData2.append("order", res.data.id)
-                        formData2.append("product", c.id)
-                        formData2.append("quantity", c.quantity)
-                        formData2.append("discount", 0)
-                        const res2 = await authApi().post(endpoints['additems'], formData2, {
-                            headers: {
-                                "Content-Type": "multipart/form-data"
-                            }
-                        })
+            cartItems.map(c => {
 
-                    }
-                    AddItem()
+                let AddItem = async () => {
+                    const formData2 = new FormData()
+                    formData2.append("order", res.data.id)
+                    formData2.append("product", c.id)
+                    formData2.append("quantity", c.quantity)
+                    formData2.append("discount", 0)
+                    const res2 = await authApi().post(endpoints['additems'], formData2, {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    })
 
-
-                })
-
-            } catch (err) {
-                console.error(err)
-            }
-            setAddress('')
-            setCartItems([])
-            setTotalQuantities(0)
-            setTotalPrice(0)
+                }
+                AddItem()
 
 
+            })
+
+        } catch (err) {
+            console.error(err)
         }
-
-        AddOder()
-        toast.success('Successfully!')
-
-
+        setCartItems([])
+        setTotalQuantities(0)
+        setTotalPrice(0)
+        setAddress('')
 
     }
+
+
+
+
+
     let body = <>
         <Container>
             <Alert variant="danger">
@@ -92,26 +87,28 @@ export default function AddOrder() {
         body = <>
 
             <Container>
-                <div style={{ margin: '5px', display: "flex", width: '100%', flexWrap: 'wrap', padding: '15px' }} >
+                <div>
                     {cartItems.map(c => {
                         return <Category id={c.id} image={c['image']} name={c['name']} price={c.price} title={c.title} quantity={c.quantity} />
                     })}
                 </div>
-                <div className="add-address"  >
-                    <InputGroup size="sm" className="mb-3" style={{ margin: "10px", width: "80%" }}>
-                        <InputGroup.Text id="inputGroup-sizing-sm">Nhap Dia Chi</InputGroup.Text>
-                        <Form.Control
-                            aria-label="Small"
-                            aria-describedby="inputGroup-sizing-sm"
-                            type="text"
-                            value={address}
-                            onChange={(event) => setAddress(event.target.value)}
-                        />
-                    </InputGroup>
-                    <button onClick={Addorders} >Đặt Hàng</button>
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Địa chỉ giao hàng: </Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={address}
+                                onChange={(event) => setAddress(event.target.value)}
+                            />
+                        </Form.Group></Col>
+                    <Col></Col>
+                </Row>
 
 
-                </div>
+                <Payment total={price} AddOrder={AddOrder} />
+
+
 
 
             </Container>
@@ -125,7 +122,6 @@ export default function AddOrder() {
         <>
 
             {body}
-            <Payment total={price} />
             <Toaster />
         </>
     )
