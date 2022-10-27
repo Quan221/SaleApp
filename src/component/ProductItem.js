@@ -23,7 +23,7 @@ const ProductItem = (props) => {
           className="item-image"
         />
         <p style={{ fontWeight: '650px', }}>{props.name}</p>
-        <p style={{ fontWeight: '850px', marginTop: '0px', color: 'blue' }}>{formatPrice}</p>
+        <p style={{ fontWeight: '850px', marginTop: '0px', color: 'blue' }}>{formatPrice} VNĐ </p>
       </div>
     </Link>
 

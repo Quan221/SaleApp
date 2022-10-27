@@ -91,8 +91,8 @@ export default function Register() {
                     <Form.Control type="file" ref={avatar} className="form-control" />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" style={{ marginLeft: '450px', marginBottom: '40px', marginTop: '0' }} >
-
+                <Button variant="primary" type="submit" style={{ marginLeft: '450px', marginBottom: '40px' }} >
+                    Đăng ký
                 </Button>
 
             </Form>

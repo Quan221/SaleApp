@@ -96,7 +96,7 @@ export default function AddOrder() {
                             onChange={(event) => setAddress(event.target.value)}
                         />
                     </InputGroup>
-                    <button onClick={Addorders} >Dang ky</button>
+                    <button onClick={Addorders} >Đặt Hàng</button>
 
 
                 </div>

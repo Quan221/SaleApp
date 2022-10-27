@@ -453,8 +453,10 @@
 }
 
 .btn-container {
-  width: 400px;
+  height: 50px;
   margin: auto;
+
+
 }
 
 .btn {
@@ -467,7 +469,7 @@
   margin-top: 10px;
   margin-top: 40px;
   text-transform: uppercase;
-  background-color: #f02d34;
+  background-color: red;
   color: #fff;
   cursor: pointer;
   transform: scale(1, 1);
@@ -561,6 +563,7 @@
 
 .price-bill h3 {
   font-size: 22px;
+  margin-top: 20px;
 
 }
 

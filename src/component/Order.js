@@ -56,7 +56,7 @@ export default function OrderList() {
                                             <td ><span>{d.product.name} </span></td>
                                             <td> x {d.quantity}</td>
 
-                                            <td>{d.sum}</td>
+                                            <td>{d.sum} VNĐ</td>
 
                                         </tr>
 
@@ -72,7 +72,7 @@ export default function OrderList() {
                                     <td colSpan={2}>total</td>
                                     <td>
 
-                                        <td>{a}</td>
+                                        <td>{a} VNĐ </td>
                                     </td>
 
 

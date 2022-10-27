@@ -14,89 +14,90 @@ const CartItem = () => {
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
   const [address, setAddress] = useState()
   console.log(cartItems)
-      
+  const formatPrice = (totalPrice).toLocaleString('en-US');
+
   return (
     <>
-    <div className="cart-wrapper" ref={cartRef}>
-      <div className="cart-container">
-        <button
-        type="button"
-        className="cart-heading"
-        onClick={() => setShowCart(false)}>
-          <AiOutlineLeft />
-          <span className="heading">Your Cart</span>
-          <span className="cart-num-items">({totalQuantities} items)</span>
-        </button>
+      <div className="cart-wrapper" ref={cartRef}>
+        <div className="cart-container">
+          <button
+            type="button"
+            className="cart-heading"
+            onClick={() => setShowCart(false)}>
+            <AiOutlineLeft />
+            <span className="heading">Your Cart</span>
+            <span className="cart-num-items">({totalQuantities} items)</span>
+          </button>
 
-        {cartItems.length < 1 && (
-          <div className="empty-cart">
-            <AiOutlineShopping size={150} />
-            <h3>Your shopping bag is empty</h3>
-            <Link href="/">
-              <button
-                type="button"
-                onClick={() => setShowCart(false)}
-                className="btn"
-              >
-                Continue Shopping
-              </button>
-            </Link>
-          </div>
-        )}
-       
-    
-    <div className="item-container">
-          {cartItems.length >= 1 && cartItems.map((item) => (
-            <div className="product">
-              <img src={item.image} className="cart-product-image" />
-              <div className="item-desc">
-                <div className="flex top">
-                  <h5>{item.name}</h5>
-                  <h4>${item.price}</h4>
-                </div>
-                <div className="flex bottom">
-                  <div>
-                  <p className="quantity-desc">
-                    <span className="minus" onClick={() => toggleCartItemQuanitity(item.id, 'dec') }>
-                    <AiOutlineMinus />
-                    </span>
-                    <span className="num" onClick="">{item.quantity}</span>
-                    <span className="plus" onClick={() => toggleCartItemQuanitity(item.id, 'inc') }><AiOutlinePlus /></span>
-                  </p>
-                  </div>
-                  <button
-                    type="button"
-                    className="remove-item"
-                    onClick={() => onRemove(item)}
-                  >
-                    <TiDeleteOutline />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        {cartItems.length >= 1 && (
-         
-          <div className="cart-bottom">
-            <div className="total">
-              <h3>Subtotal:</h3>
-              <h3>${totalPrice}</h3>
-            </div>     
-                <div className="btn-container">
-             <Link to='/addorders'  > <button  type="submit" className='btn' onClick={() => setShowCart(false)} >
-                Accept
-              </button>
+          {cartItems.length < 1 && (
+            <div className="empty-cart">
+              <AiOutlineShopping size={150} />
+              <h3>Your shopping bag is empty</h3>
+              <Link href="/">
+                <button
+                  type="button"
+                  onClick={() => setShowCart(false)}
+                  className="btn"
+                >
+                  Continue Shopping
+                </button>
               </Link>
-              </div>
-            
+            </div>
+          )}
 
-            
+
+          <div className="item-container">
+            {cartItems.length >= 1 && cartItems.map((item) => (
+              <div className="product">
+                <img src={item.image} className="cart-product-image" />
+                <div className="item-desc">
+                  <div className="flex top">
+                    <h5>{item.name}</h5>
+                    <h4>{item.price} VNĐ </h4>
+                  </div>
+                  <div className="flex bottom">
+                    <div>
+                      <p className="quantity-desc">
+                        <span className="minus" onClick={() => toggleCartItemQuanitity(item.id, 'dec')}>
+                          <AiOutlineMinus />
+                        </span>
+                        <span className="num" onClick="">{item.quantity}</span>
+                        <span className="plus" onClick={() => toggleCartItemQuanitity(item.id, 'inc')}><AiOutlinePlus /></span>
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      className="remove-item"
+                      onClick={() => onRemove(item)}
+                    >
+                      <TiDeleteOutline />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-          
-        )}
-         </div>
+          {cartItems.length >= 1 && (
+
+            <div className="cart-bottom">
+              <div className="total">
+                <h3>Total:</h3>
+                <h3>{formatPrice} VNĐ </h3>
+              </div>
+              <div className="btn-container">
+                <Link to='/addorders' className='nav-link' > <button type="submit" className='btn' onClick={() => setShowCart(false)} style={{ backgroundColor: 'red' }}  >
+                  Accept
+                </button>
+                </Link>
+              </div>
+
+
+
+            </div>
+
+          )}
         </div>
+      </div>
     </>
   )
 }

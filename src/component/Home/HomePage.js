@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { Form, Button, Container, Col, Figure, Image, } from 'react-bootstrap'
 import Banners from '../../image/banner.jpg'
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import ProductItem from "../ProductItem.js"
 import { useEffect } from "react"
 import Apis, { authApi, endpoints } from "../../configs/Api.js"
@@ -15,6 +15,7 @@ const HomePage = () => {
     const [next, setNext] = useState()
     const [pre, setPre] = useState()
     const [categories, setCategories] = useState([])
+
     useEffect(() => {
         const loadProducts = async () => {
 
@@ -68,8 +69,8 @@ const HomePage = () => {
         }
 
     }
-    const getCategories = async () => {
-        let res3 = await authApi().get((endpoints['getProductByCate'](categories.id)))
+    const getCategories = async (id) => {
+        let res3 = await authApi().get((endpoints['getProductByCate'](id)))
         setProducts(res3.data)
 
     }
@@ -81,7 +82,7 @@ const HomePage = () => {
         <Container>
             <div style={{ display: 'flex' }} >
                 {categories.map(c => {
-                    return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={getCategories()} >{c.name}</Button>)
+                    return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={() => getCategories(c.id)} >{c.name}</Button>)
                 })}
 
 

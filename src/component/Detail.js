@@ -19,7 +19,7 @@ const Detail = () => {
         const loadDetail = async () => {
 
             let res = await Api.get((endpoints['products-detail'](productsId)))
-            res.data.price = res.data.price.toLocaleString('en-US')
+            // res.data.price = res.data.price.toLocaleString('en-US')
             setDetail(res.data)
             console.log(res.data)
 
@@ -68,7 +68,7 @@ const Detail = () => {
                         </div>
                         <div style={{ justifyContent: 'space-between', display: 'flex' }} >
                             <div><p>Price : </p></div>
-                            <div><p>{detail.price} VND</p></div>
+                            <div><h2>{detail.price} VND</h2></div>
                         </div>
 
 

@@ -16,7 +16,7 @@ const Category = (props) => {
                 <br />
                 <div className="price-bill" >
                     <h3>Price </h3>
-                    <h3 >{props.price} d </h3>
+                    <h3 >{props.price} VNĐ </h3>
                 </div>
             </div>
             <div className='img-category'>
