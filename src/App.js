@@ -17,6 +17,8 @@ import { StateContext } from './reducer/StateContext';
 import AddOrders from './component/AddOrders';
 import OrderList from './component/Order';
 import Shipper from './component/shipper';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
 
 
 export const UserContext = createContext()
@@ -28,49 +30,54 @@ function App() {
   const [user, dispatch] = useReducer(myReducer)
   let btn = <>
 
+
   </>
+
+
   if (user != null) {
     btn = <>
       <Header />
     </>
   }
   return (
-    <BrowserRouter>
-      <UserContext.Provider value={[user, dispatch]} >
-        <StateContext>
-          {btn}
-          {/* <RegisterShiper/> */}
-          <Routes>
+    <PayPalScriptProvider options={{
+      "client-id": "ARPZplyh7bDL43TQSiqTF3Tf7ytbjE5vNvZsUzrPfLunZfbioCY2KNWrQIVzgI08NOvJW2xTNSi5GOhi"
+    }}>
+      <BrowserRouter>
 
-            {/* <Detail/> */}
-            {/* <Login/> */}
-            {/* <HomePage/> */}
-            {/* <Item/> */}
-            {/* <Category/> */}
+        < UserContext.Provider value={[user, dispatch]} >
+          <StateContext>
+            {btn}
+            {/* <RegisterShiper/> */}
+            <Routes>
 
-            {/* shipper
+              {/* <Detail/> */}
+              {/* <Login/> */}
+              {/* <HomePage/> */}
+              {/* <Item/> */}
+              {/* <Category/> */}
+
+              {/* shipper
         shiper-oder
         oder
         product */}
-            <Route path="/" element={<Login />} />
-            <Route path="/homepage" element={<HomePage />} />
+              <Route path="/" element={<Login />} />
+              <Route path="/homepage" element={<HomePage />} />
 
-            <Route path='/products/:productsId/' element={<Detail />} />
-            {/* <Route path='/category' element={<Category/>}/> */}
-            <Route path='/register' element={<Register />} />
-            <Route path='/addorders' element={<AddOrders />} />
-            <Route path='/order' element={<OrderList />} />
-            <Route path='/shipper' element={<Shipper />} />
-
-
-          </Routes>
-        </StateContext>
-      </UserContext.Provider>
+              <Route path='/products/:productsId/' element={<Detail />} />
+              {/* <Route path='/category' element={<Category/>}/> */}
+              <Route path='/register' element={<Register />} />
+              <Route path='/addorders' element={<AddOrders />} />
+              <Route path='/order' element={<OrderList />} />
+              <Route path='/shipper' element={<Shipper />} />
 
 
 
-
-    </BrowserRouter>
+            </Routes>
+          </StateContext>
+        </UserContext.Provider>
+      </BrowserRouter >
+    </PayPalScriptProvider >
   );
 }
 

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Button, FormControl, InputGroup, Form, Container, Toast } from "react-bootstrap";
+import React, { useState, useRef } from "react";
+import { Button, FormControl, InputGroup, Form, Container, Toast, Alert } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { authApi, endpoints } from "../configs/Api";
 import { useStateContext } from "../reducer/StateContext";
 import Category from "./Category";
+import Payment from "./Payment";
+
 
 // function AddOrderForm(props) {
 //     return (
@@ -18,7 +20,8 @@ import Category from "./Category";
 
 export default function AddOrder() {
     const [address, setAddress] = useState()
-    const { cartItems, setCartItems, setTotalQuantities, setTotalPrice } = useStateContext()
+    const { cartItems, setCartItems, setTotalQuantities, setTotalPrice, totalPrice } = useStateContext()
+    const [checkout, setCheckOut] = useState(false);
     const Addorders = (event) => {
         event.preventDefault()
 
@@ -71,11 +74,19 @@ export default function AddOrder() {
 
     }
     let body = <>
-        <h1 style={{ textAlign: 'center' }} >Chua co don hang</h1>
+        <Container>
+            <Alert variant="danger">
+                Chưa có đơn hàng
+            </Alert>
+
+        </Container>
+
 
 
 
     </>
+
+
     if (cartItems.length > 0) {
         body = <>
 
@@ -111,7 +122,9 @@ export default function AddOrder() {
 
     return (
         <>
+
             {body}
+            <Payment total={Number(2000)} />
             <Toaster />
         </>
     )
