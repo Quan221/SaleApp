@@ -31,7 +31,7 @@ const Payment = (props) => {
                                 {
                                     description: 'Payment',
                                     amount: {
-                                        value: props.totalPrice
+                                        value: props.total
 
                                     }
                                 }
@@ -41,6 +41,7 @@ const Payment = (props) => {
                     onApprove={async (data, actions) => {
                         const order = await actions.order.capture();
                         console.log("order: ", order)
+                        handleApprove()
                     }}
                     onError={(err) => {
                         setError(err);

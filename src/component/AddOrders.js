@@ -22,6 +22,7 @@ export default function AddOrder() {
     const [address, setAddress] = useState()
     const { cartItems, setCartItems, setTotalQuantities, setTotalPrice, totalPrice } = useStateContext()
     const [checkout, setCheckOut] = useState(false);
+    const price = (parseFloat(totalPrice) / 24000).toFixed(2)
     const Addorders = (event) => {
         event.preventDefault()
 
@@ -124,7 +125,7 @@ export default function AddOrder() {
         <>
 
             {body}
-            <Payment total={Number(2000)} />
+            <Payment total={price} />
             <Toaster />
         </>
     )
