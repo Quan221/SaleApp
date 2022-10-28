@@ -7,7 +7,6 @@ import { useStateContext } from "../reducer/StateContext";
 
 const Payment = (props) => {
     const [paidFor, setPaidFor] = useState(false)
-    const [add, setAdd] = useState(true)
     const [error, setError] = useState(null)
 
     const handleApprove = () => {
