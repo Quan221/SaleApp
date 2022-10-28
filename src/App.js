@@ -19,8 +19,6 @@ import OrderList from './component/Order';
 import Shipper from './component/shipper';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-
-
 export const UserContext = createContext()
 
 

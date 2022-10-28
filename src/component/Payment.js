@@ -1,29 +1,27 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Form, Button, Container, Col, Figure, } from 'react-bootstrap'
 import { PayPalButtons } from '@paypal/react-paypal-js'
 import toast, { Toaster } from "react-hot-toast";
-
-
-
+import { authApi, endpoints } from "../configs/Api";
+import { useStateContext } from "../reducer/StateContext";
 
 const Payment = (props) => {
     const [paidFor, setPaidFor] = useState(false)
+    const [add, setAdd] = useState(true)
     const [error, setError] = useState(null)
 
-    const handleApprove = (orderId) => {
+    const handleApprove = () => {
         setPaidFor(true)
-        props.AddOrder()
-        toast.success('Successfully!')
 
     }
 
     if (paidFor) {
-
+        props.AddReceipt()
+        toast.success('Successfully!')
 
     }
-    if (error) {
-        alert(error);
-    }
+
+
 
     return (
         <>
@@ -34,6 +32,7 @@ const Payment = (props) => {
                 <PayPalButtons
                     createOrder={(data, actions) => {
                         return actions.order.create({
+
                             purchase_units: [
                                 {
                                     description: 'Payment',
