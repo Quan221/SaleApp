@@ -4,6 +4,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { authApi, endpoints } from "../configs/Api";
 import { useStateContext } from "../reducer/StateContext";
 import Category from "./Category";
+import { PayPalButtons } from '@paypal/react-paypal-js'
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
+
 
 // function AddOrderForm(props) {
 //     return (
@@ -18,14 +22,13 @@ import Category from "./Category";
 
 export default function AddOrder() {
     const [address, setAddress] = useState()
-    const { cartItems, setCartItems, setTotalQuantities, setTotalPrice } = useStateContext()
-    const Addorders = (event) => {
-        event.preventDefault()
+    const { cartItems, setCartItems, setTotalQuantities, setTotalPrice, totalPrice } = useStateContext()
 
-
+    const Addorders = () => {
+        const place = document.getElementById('address').value
         let AddOder = async () => {
             const formData = new FormData()
-            formData.append("ship_address", address)
+            formData.append("ship_address", place)
             try {
                 const res = await authApi().post(endpoints['addorder'], formData, {
                     headers: {
@@ -56,7 +59,6 @@ export default function AddOrder() {
             } catch (err) {
                 console.error(err)
             }
-            setAddress('')
             setCartItems([])
             setTotalQuantities(0)
             setTotalPrice(0)
@@ -65,9 +67,14 @@ export default function AddOrder() {
         }
 
         AddOder()
+
+
+
+    }
+    const handleApprove = () => {
+
+        Addorders()
         toast.success('Successfully!')
-
-
 
     }
     let body = <>
@@ -89,6 +96,7 @@ export default function AddOrder() {
                     <InputGroup size="sm" className="mb-3" style={{ margin: "10px", width: "80%" }}>
                         <InputGroup.Text id="inputGroup-sizing-sm">Nhap Dia Chi</InputGroup.Text>
                         <Form.Control
+                            id="address"
                             aria-label="Small"
                             aria-describedby="inputGroup-sizing-sm"
                             type="text"
@@ -100,6 +108,33 @@ export default function AddOrder() {
 
 
                 </div>
+                <PayPalButtons
+                    createOrder={(data, actions) => {
+                        return actions.order.create({
+
+                            purchase_units: [
+                                {
+                                    description: 'Payment',
+                                    amount: {
+                                        value: (parseFloat(totalPrice) / 24000).toFixed(2)
+
+
+                                    }
+                                }
+                            ]
+                        })
+                    }}
+                    onApprove={async (data, actions) => {
+                        const order = await actions.order.capture();
+                        console.log("order: ", order)
+                        handleApprove()
+                    }}
+                    onError={(err) => {
+                        console.log("Error: ", err)
+                    }
+
+                    }
+                />
 
 
             </Container>
@@ -111,8 +146,12 @@ export default function AddOrder() {
 
     return (
         <>
-            {body}
-            <Toaster />
+            <PayPalScriptProvider options={{
+                "client-id": "ARPZplyh7bDL43TQSiqTF3Tf7ytbjE5vNvZsUzrPfLunZfbioCY2KNWrQIVzgI08NOvJW2xTNSi5GOhi"
+            }}>
+                {body}
+                <Toaster />
+            </PayPalScriptProvider>
         </>
     )
 }
