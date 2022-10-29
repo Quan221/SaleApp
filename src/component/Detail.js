@@ -56,7 +56,7 @@ const Detail = () => {
                     {/* <h3 style={{marginLeft:'125px'}} >Be Friend</h3> */}
                     <div style={{ width: '420px', height: '418px', marginLeft: '250px', display: 'block', padding: '3px', position: "absolute", left: "600px", top: "353px" }}>
                         <div>
-                            <span className="content" >{detail.title}</span>
+                            <span className="content" >{detail.description}</span>
                         </div>
                         <div className="quantity">
                             <h4>Số lượng:</h4>

@@ -165,8 +165,6 @@
   width: 736px;
   height: 772px;
   background-color: #FFF;
-
-
 }
 
 .detail-image {
@@ -250,9 +248,7 @@
   display: flex;
 }
 
-.detail-left {
-  background-color: #F4F4F2;
-}
+
 
 .detail-right {
   width: 706px;
