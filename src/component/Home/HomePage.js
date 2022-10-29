@@ -26,6 +26,7 @@ const HomePage = () => {
             setPre(res.data.pre)
             console.log(res.data)
 
+
         }
         const loadCategories = async () => {
             const res2 = await authApi().get(endpoints['categories'])
@@ -36,6 +37,7 @@ const HomePage = () => {
         loadProducts()
         loadCategories()
     }, [])
+
 
     const prevPage = async () => {
         if (pre) {

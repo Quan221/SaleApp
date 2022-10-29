@@ -11,7 +11,7 @@ const ProductItem = (props) => {
 
 
   // }
-  const formatPrice = (props.price).toLocaleString('en-US');
+  const formatPrice = props.price > 0 ? (props.price).toLocaleString('en-US') : "";
   return (
 
     <Link to={`/products/${props.id}`} className='nav-link' >

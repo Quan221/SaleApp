@@ -57,16 +57,16 @@ function Header() {
 
       </>
       btn2 = <>
-        <Link to='/homepage' className='nav-link' >Home</Link>
-        <Link to='/order' className='nav-link' >Order</Link>
-        <Link to='/addorders' className='nav-link' >Add Order</Link>
+        <Link to='/homepage' className='nav-link' >Trang chủ</Link>
+        <Link to='/order' className='nav-link' >Đơn hàng của tôi</Link>
+        <Link to='/addorders' className='nav-link' >Đặt hàng</Link>
 
       </>
     }
     else {
       btn = <>
         <div style={{ marginTop: '8px' }} > {user.username}</div>
-        <Link to='/' onClick={logout} > <button className='btn-logout'  > Log out</button></Link>
+        <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
 
       </>
       btn2 = <>
@@ -89,7 +89,7 @@ function Header() {
   return (
     <Navbar bg="light" expand="lg" >
       <Container>
-        <Navbar.Brand href="#home">Quang&Quan</Navbar.Brand>
+        <Navbar.Brand href="#home">SIÊU THỊ ĐIỆN MÁY OU-MARKET</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

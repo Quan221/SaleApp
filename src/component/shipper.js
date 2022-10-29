@@ -29,7 +29,7 @@ export default function Shipper() {
       <Table striped bordered hover size="sm" style={{ marginTop: '20px' }}>
         <thead>
           <tr>
-            <th colSpan={5} style={{ textAlign: 'center' }} >Danh Sach Don Hang</th>
+            <th colSpan={5} style={{ textAlign: 'center' }} >Danh sách các đơn hàng: </th>
 
           </tr>
         </thead>
