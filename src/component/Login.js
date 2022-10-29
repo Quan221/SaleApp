@@ -66,7 +66,7 @@ const Login = () => {
                 <Container >
 
 
-                    <h1 className="text-center text-success">Log in</h1>
+                    <h1 className="text-center text-success">Đăng nhập</h1>
                     <Col >
                         <Form onSubmit={login}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -74,7 +74,7 @@ const Login = () => {
                                 <Form.Control type="text"
                                     value={username}
                                     onChange={(evt) => setUsername(evt.target.value)}
-                                    placeholder="Nhap username"
+                                    placeholder="Tên đăng nhập"
                                     required />
                             </Form.Group>
 
@@ -86,9 +86,16 @@ const Login = () => {
                                     placeholder="Password" required />
                             </Form.Group>
                             <Button variant="success" type="submit" className="button ">
-                                Login
+                                Đăng nhập
                             </Button>
-                            <Link to="/register" className=' btn-register' variant="success" >Dang ky</Link>
+
+                            <hr />
+                            <Button variant="white" className="button ">
+                                <Link to="/register" className='text-dark bold' variant="success" >Đăng ký tài khoản</Link>
+
+                            </Button>
+
+
                         </Form>
                     </Col>
                 </Container>

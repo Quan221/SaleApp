@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Form, Button, Container, Col, Figure, Image, } from 'react-bootstrap'
+import { Form, Button, Container, Col, Figure, Image, Alert, Badge, } from 'react-bootstrap'
 import Banners from '../../image/banner.jpg'
 import { Link, useSearchParams } from "react-router-dom"
 import ProductItem from "../ProductItem.js"
@@ -77,8 +77,7 @@ const HomePage = () => {
 
 
     let content = <>
-
-        <h1 className="text-aglin text-center" >Product</h1>
+        <h1 bg="warning" className="text-center mt-5 .text-dark">Danh sách sản phẩm</h1>
         <Container>
             <div style={{ display: 'flex' }} >
                 {categories.map(c => {

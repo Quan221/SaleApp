@@ -47,7 +47,7 @@ function Header() {
 
       btn = <>
         <div style={{ marginTop: '8px' }} > {user.username}</div>
-        <Link to='/' onClick={logout} > <button className='btn-logout'  > Log out</button></Link>
+        <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
         <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
           <AiOutlineShopping />
           <span className="cart-item-qty">{totalQuantities}</span>

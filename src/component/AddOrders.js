@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormControl, InputGroup, Form, Container, Toast } from "react-bootstrap";
+import { Button, FormControl, InputGroup, Form, Container, Toast, Alert } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { authApi, endpoints } from "../configs/Api";
 import { useStateContext } from "../reducer/StateContext";
@@ -66,8 +66,14 @@ export default function AddOrder() {
 
     }
     let body = <>
-        <h1 style={{ textAlign: 'center' }} >Chua co don hang</h1>
+        <Alert variant="danger">
+            <Alert.Heading>Chưa có đơn hàng</Alert.Heading>
+            <p>
+                Hiện tại bạn chưa có đơn hàng trong giỏ, hãy trở lại shop mua sắm và thêm món hàng yêu thích của bạn vào giỏ
+            </p>
+            <hr />
 
+        </Alert>
 
 
     </>
@@ -82,7 +88,7 @@ export default function AddOrder() {
                 </div>
                 <div className="add-address"  >
                     <InputGroup size="sm" className="mb-3" style={{ margin: "10px", width: "80%" }}>
-                        <InputGroup.Text id="inputGroup-sizing-sm">Nhap Dia Chi</InputGroup.Text>
+                        <InputGroup.Text id="inputGroup-sizing-sm">Địa chỉ giao hàng</InputGroup.Text>
                         <Form.Control
                             id="address"
                             aria-label="Small"
@@ -96,6 +102,13 @@ export default function AddOrder() {
 
                 </div>
                 <PayPalButtons
+                    style={{
+                        color: "silver",
+                        layout: "horizontal",
+                        height: 48,
+                        tagline: false,
+                        shape: "pill"
+                    }}
                     createOrder={(data, actions) => {
                         return actions.order.create({
 

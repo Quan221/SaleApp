@@ -21,13 +21,18 @@ const Detail = () => {
 
             let res = await Api.get((endpoints['products-detail'](productsId)))
             setDetail(res.data)
+
             console.log(res.data)
 
         }
 
         loadDetail()
 
+
     }, [])
+
+    const result = detail.price > 0 ? detail.price.toLocaleString('en-US') : '';
+
     return (
         <>
             <div className="detail" >
@@ -42,9 +47,9 @@ const Detail = () => {
                 </div>
                 <div className="detail-right">
                     <Link to='/homepage' className="nav-link" >
-                        <div className="btn-back"  >
-                            <BsArrowLeft style={{ color: 'black', fontSize: '40px', marginLeft: '50px', marginTop: '50px' }}></BsArrowLeft>
-                            <h2 style={{ marginTop: '50px', marginLeft: '5px' }}>Back</h2>
+                        <div className="btn-back text-danger" bg="primary" >
+                            <BsArrowLeft style={{ color: 'danger', fontSize: '40px', marginLeft: '50px', marginTop: '50px' }}></BsArrowLeft>
+                            <h2 style={{ marginTop: '50px', marginLeft: '5px' }}>Trang chủ</h2>
                         </div>
                     </Link>
                     <h1 style={{ marginLeft: '130px' }} >{detail.name}</h1>
@@ -54,15 +59,17 @@ const Detail = () => {
                             <span className="content" >{detail.title}</span>
                         </div>
                         <div className="quantity">
-                            <h4>Quantity:</h4>
+                            <h4>Số lượng:</h4>
                             <p className="quantity-desc">
                                 <span className="minus" onClick={decQty}><AiOutlineMinus /></span>
                                 <span className="num">{qty}</span>
                                 <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
                             </p>
                         </div>
+                        <h3 className="mt-5">Đơn giá: <span> {result} VNĐ</span></h3>
 
-                        <Button style={{ position: 'absolute', bottom: "10%", width: "392px", height: "48px" }} variant="success" onClick={() => onAdd(detail, qty)} ><Link to='/homepage' className="nav-link" >AddToCard</Link></Button>
+
+                        <Button style={{ position: 'absolute', bottom: "10%", width: "392px", height: "48px" }} variant="success" onClick={() => onAdd(detail, qty)} className="nav-link text-white" >Thêm vào giỏ</Button>
 
 
                     </div>

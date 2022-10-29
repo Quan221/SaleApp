@@ -40,7 +40,7 @@ export default function OrderList() {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th colSpan={3} style={{ textAlign: "center" }}  >order: {c.status} </th>
+                                    <th colSpan={3} style={{ textAlign: "center" }}  >Trạng thái đơn hàng: {c.status} </th>
                                     {/* <th>{c.status}</th> */}
                                 </tr>
                             </thead>
@@ -77,6 +77,8 @@ export default function OrderList() {
 
 
                                 </tr>
+
+
                             </tbody>
 
                         </Table>

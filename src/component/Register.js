@@ -66,7 +66,7 @@ export default function Register() {
 
     return (
         <Container>
-            <h1 className="text-center text-success">DANG KY NGUOI DUNG</h1>
+            <h1 className="text-center text-success mt-5">Đăng ký người dùng</h1>
             <Form onSubmit={register}>
                 <RegisterForm id="firstName" label="First Name"
                     type="text" value={firstName}
@@ -91,7 +91,7 @@ export default function Register() {
                     <Form.Control type="file" ref={avatar} className="form-control" />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" style={{ marginLeft: '450px', marginBottom: '40px' }} >
+                <Button variant="success" type="submit" style={{ marginLeft: '450px', marginBottom: '40px' }} >
                     Đăng ký
                 </Button>
 
@@ -109,4 +109,4 @@ function RegisterForm(props) {
                 onChange={props.change} />
         </Form.Group>
     )
-} 
+}
