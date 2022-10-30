@@ -38,45 +38,42 @@ function App() {
     </>
   }
   return (
-    <PayPalScriptProvider options={{
-      "client-id": "ARPZplyh7bDL43TQSiqTF3Tf7ytbjE5vNvZsUzrPfLunZfbioCY2KNWrQIVzgI08NOvJW2xTNSi5GOhi"
-    }}>
-      <BrowserRouter>
 
-        < UserContext.Provider value={[user, dispatch]} >
-          <StateContext>
-            {btn}
-            {/* <RegisterShiper/> */}
-            <Routes>
+    <BrowserRouter>
 
-              {/* <Detail/> */}
-              {/* <Login/> */}
-              {/* <HomePage/> */}
-              {/* <Item/> */}
-              {/* <Category/> */}
+      < UserContext.Provider value={[user, dispatch]} >
+        <StateContext>
+          {btn}
+          {/* <RegisterShiper/> */}
+          <Routes>
 
-              {/* shipper
+            {/* <Detail/> */}
+            {/* <Login/> */}
+            {/* <HomePage/> */}
+            {/* <Item/> */}
+            {/* <Category/> */}
+
+            {/* shipper
         shiper-oder
         oder
         product */}
-              <Route path="/" element={<Login />} />
-              <Route path="/homepage" element={<HomePage />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/homepage" element={<HomePage />} />
 
-              <Route path='/products/:productsId/' element={<Detail />} />
-              {/* <Route path='/category' element={<Category/>}/> */}
-              <Route path='/register' element={<Register />} />
-              <Route path='/addorders' element={<AddOrders />} />
-              <Route path='/order' element={<OrderList />} />
-              <Route path='/shipper' element={<Shipper />} />
-              <Route path='/category' element={<Category />} />
+            <Route path='/products/:productsId/' element={<Detail />} />
+            {/* <Route path='/category' element={<Category/>}/> */}
+            <Route path='/register' element={<Register />} />
+            <Route path='/addorders' element={<AddOrders />} />
+            <Route path='/order' element={<OrderList />} />
+            <Route path='/shipper' element={<Shipper />} />
+            <Route path='/category' element={<Category />} />
 
 
 
-            </Routes>
-          </StateContext>
-        </UserContext.Provider>
-      </BrowserRouter >
-    </PayPalScriptProvider >
+          </Routes>
+        </StateContext>
+      </UserContext.Provider>
+    </BrowserRouter >
   );
 }
 
