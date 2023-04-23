@@ -17,18 +17,6 @@ function Header() {
   const { showCart, setShowCart, totalQuantities } = useStateContext();
 
 
-  // useEffect(()=>{
-  //   const loadUsers= async()=>{
-  //       const cus = await authApi().get(endpoints['current-user'])
-  //           setUsers(cus.data)
-  //           console.log(cus)
-
-  //   }
-  //       loadUsers()
-
-
-  //               },[])
-
   let btn = <>
 
     <button className='btn-login'><Link to="/" className='nav-link' >Log in</Link> </button>
@@ -41,40 +29,56 @@ function Header() {
     dispatch({ "type": "logout" })
     localStorage.clear()
   }
-
   if (user != null) {
-    if (user.role == "Customer") {
+    btn = <>
+      <div style={{ marginTop: '8px' }} > {user.username}</div>
+      <Link to='/' onClick={logout} > <button className='btn-logout'> Đăng xuất</button></Link>
+      <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
+        <AiOutlineShopping />
+        <span className="cart-item-qty">{totalQuantities}</span>
+      </button>
 
-      btn = <>
-        <div style={{ marginTop: '8px' }} > {user.username}</div>
-        <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
-        <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
-          <AiOutlineShopping />
-          <span className="cart-item-qty">{totalQuantities}</span>
-        </button>
+      {showCart && <CartItem />}
+    </>
+    btn2 = <>
+      <Link to='/homepage' className='nav-link' >Trang chủ</Link>
+      <Link to='/order' className='nav-link' >Đơn hàng của tôi</Link>
+      <Link to='/addorders' className='nav-link' >Đặt hàng</Link>
 
-        {showCart && <CartItem />}
+    </>
 
-      </>
-      btn2 = <>
-        <Link to='/homepage' className='nav-link' >Trang chủ</Link>
-        <Link to='/order' className='nav-link' >Đơn hàng của tôi</Link>
-        <Link to='/addorders' className='nav-link' >Đặt hàng</Link>
+    // if (user.role == "Customer") {
 
-      </>
-    }
-    else {
-      btn = <>
-        <div style={{ marginTop: '8px' }} > {user.username}</div>
-        <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
+    //   btn = <>
+    //     <div style={{ marginTop: '8px' }} > {user.username}</div>
+    //     <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
+    //     <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
+    //       <AiOutlineShopping />
+    //       <span className="cart-item-qty">{totalQuantities}</span>
+    //     </button>
 
-      </>
-      btn2 = <>
-        <Link to='/shipper' className='nav-link' >Order List</Link>
-        <Link to='/homepage' className='nav-link' >Home</Link>
-      </>
+    //     {showCart && <CartItem />}
 
-    }
+    //   </>
+    //   btn2 = <>
+    //     <Link to='/homepage' className='nav-link' >Trang chủ</Link>
+    //     <Link to='/order' className='nav-link' >Đơn hàng của tôi</Link>
+    //     <Link to='/addorders' className='nav-link' >Đặt hàng</Link>
+
+    //   </>
+    // }
+    // else {
+    //   btn = <>
+    //     <div style={{ marginTop: '8px' }} > {user.name}</div>
+    //     <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
+
+    //   </>
+    //   btn2 = <>
+    //     <Link to='/shipper' className='nav-link' >Order List</Link>
+    //     <Link to='/homepage' className='nav-link' >Home</Link>
+    //   </>
+
+    // }
   }
 
 

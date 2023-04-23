@@ -38,7 +38,7 @@ const Detail = () => {
             <div className="detail" >
                 <div className="detail-left">
                     <div className="detail-image" >
-                        <Image src={detail.image} style={{ width: '408px', height: '464px' }} />
+                        <Image src={detail.imageUrl} style={{ width: '408px', height: '464px' }} />
                     </div>
 
 

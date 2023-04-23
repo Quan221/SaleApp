@@ -12,100 +12,74 @@ import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai"
 const HomePage = () => {
     const [user, dispatch] = useContext(UserContext)
     const [products, setProducts] = useState([])
-    const [next, setNext] = useState()
-    const [pre, setPre] = useState()
     const [categories, setCategories] = useState([])
+    const [cateId, setCateId] = useState()
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         const loadProducts = async () => {
-
-
-            const res = await authApi().get(endpoints['products'])
-            setProducts(res.data.results)
-            setNext(res.data.next)
-            setPre(res.data.pre)
-            console.log(res.data)
-
-
+            const res = await authApi().get(endpoints['products'], { params: { cateId, search } })
+            setProducts(res.data)
         }
+        loadProducts()
+    }, [cateId, search])
+
+
+    useEffect(() => {
         const loadCategories = async () => {
             const res2 = await authApi().get(endpoints['categories'])
             console.log(res2.data)
             setCategories(res2.data)
         }
-
-        loadProducts()
         loadCategories()
     }, [])
 
 
-    const prevPage = async () => {
-        if (pre) {
-            await axios.get(pre)
-                .then((res) => {
-                    console.log(res.data);
-                    setProducts(res.data.results)
-                    setNext(res.data.next)
-                    setPre(res.data.previous)
 
-
-                })
-
-        }
-
-    }
-
-    const nextPage = async () => {
-        if (next) {
-            await axios.get(next)
-                .then((res) => {
-                    console.log(res.data);
-                    setProducts(res.data.results)
-                    setNext(res.data.next)
-                    setPre(res.data.previous)
-
-
-                })
-
-
-        }
-
-    }
     const getCategories = async (id) => {
-        let res3 = await authApi().get((endpoints['getProductByCate'](id)))
-        setProducts(res3.data)
-
+        setCateId(id)
     }
 
+    const handleSearchInputChange = (event) => {
+        event.preventDefault();
+        setSearch(event.target.value);
+    }
 
+    const handleSearchButtonClick = () => {
+        setSearch(search);
+    }
     let content = <>
         <h1 bg="warning" className="text-center mt-5 .text-dark">Danh sách sản phẩm</h1>
         <Container>
             <div style={{ display: 'flex' }} >
-                {categories.map(c => {
+                {categories && categories.map(c => {
                     return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={() => getCategories(c.id)} >{c.name}</Button>)
                 })}
-
-
             </div>
+            <Form>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Control type="text" placeholder="Nhập tên sản phẩm" value={search} onChange={handleSearchInputChange} />
+                </Form.Group>
+                <Button variant="primary" onClick={handleSearchButtonClick}>Tìm kiếm</Button>
+            </Form>
         </Container>
         <Container >
             <div style={{ textAlign: 'center' }} >
-                <AiOutlineDoubleLeft onClick={() => prevPage()} style={{ cursor: 'pointer' }} >
+                <AiOutlineDoubleLeft style={{ cursor: 'pointer' }} >
 
                 </AiOutlineDoubleLeft>
 
 
-                <AiOutlineDoubleRight onClick={() => nextPage()} style={{ cursor: 'pointer' }} >
+                <AiOutlineDoubleRight style={{ cursor: 'pointer' }} >
 
                 </AiOutlineDoubleRight>
             </div>
 
         </Container>
 
-        <div className="item-container"  >
-            {products.map(c => {
-                return <ProductItem id={c.id} image={c['image']} name={c['name']} price={c.price} />
+        <div className="item-container">
+            {products && products.map(c => {
+                return <ProductItem id={c.id} image={c['imageUrl']} name={c['name']} price={c.price} />
             })}
 
         </div></>
@@ -141,7 +115,3 @@ const HomePage = () => {
 
 }
 export default HomePage;
-function getProduct(props) {
-
-
-}
