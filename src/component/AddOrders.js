@@ -83,7 +83,7 @@ export default function AddOrder() {
             <Container>
                 <div style={{ margin: '5px', display: "flex", width: '100%', flexWrap: 'wrap', }} >
                     {cartItems.map(c => {
-                        return <Category id={c.id} image={c['image']} name={c['name']} price={c.price} title={c.title} quantity={c.quantity} />
+                        return <Category id={c.id} image={c['imageUrl']} name={c['name']} price={c.price} title={c.title} quantity={c.quantity} />
                     })}
                 </div>
                 <div className="add-address"  >

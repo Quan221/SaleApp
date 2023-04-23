@@ -18,6 +18,7 @@ import AddOrders from './component/AddOrders';
 import OrderList from './component/Order';
 import Shipper from './component/shipper';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import AddProduct from './component/AddProduct';
 
 export const UserContext = createContext()
 
@@ -67,7 +68,7 @@ function App() {
             <Route path='/order' element={<OrderList />} />
             <Route path='/shipper' element={<Shipper />} />
             <Route path='/category' element={<Category />} />
-
+            <Route path='/add-product' element={<AddProduct/>}/>
 
 
           </Routes>

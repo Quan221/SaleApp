@@ -26,19 +26,20 @@ export default function Register() {
         event.preventDefault()
 
         let registerUser = async () => {
-            const formData = new FormData()
-            formData.append("first_name", firstName)
-            formData.append("last_name", lastName)
-            formData.append("email", email)
-            formData.append("password", password)
-            formData.append("username", username)
+            const data = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+              }
 
             try {
-                console.log(formData)
+                console.log(data)
 
-                await Apis.post(endpoints['register'], formData, {
+                await Apis.post(endpoints['register'], data, {
                     headers: {
-                        "Content-Type": "multipart/form-data"
+                        "Content-Type": "application/json"
                     }
 
                 })
@@ -77,9 +78,6 @@ export default function Register() {
                 <RegisterForm id="email" label="Email"
                     type="email" value={email}
                     change={(event) => setEmail(event.target.value)} />
-                <RegisterForm id="username" label="Username"
-                    type="text" value={username}
-                    change={(event) => setUsername(event.target.value)} />
                 <RegisterForm id="password" label="Password"
                     type="password" value={password}
                     change={(event) => setPassword(event.target.value)} />

@@ -49,7 +49,7 @@ const CartItem = () => {
           <div className="item-container">
             {cartItems.length >= 1 && cartItems.map((item) => (
               <div className="product">
-                <img src={item.image} className="cart-product-image" />
+                <img src={item.imageUrl} className="cart-product-image" />
                 <div className="item-desc">
                   <div className="flex top">
                     <h5>{item.name}</h5>

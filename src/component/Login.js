@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react'
-import { Form, Button, Container, Col, Figure, } from 'react-bootstrap'
+import { Form, Button, Container, Col } from 'react-bootstrap'
 import { Link, Navigate } from 'react-router-dom'
 import { UserContext } from '../App'
 import Apis, { endpoints, authApi } from '../configs/Api.js'
-import cookies from 'react-cookies'
 import "../App.css"
 import "../image/Loginscreen.jpg"
-import axios from 'axios'
+
 
 
 
@@ -21,6 +20,7 @@ const Login = () => {
             password: password,
             email: username,
         };
+        
         const res = await Apis.post(endpoints['login'], data, {
             headers: {
                 "Content-Type": "application/json"

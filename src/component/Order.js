@@ -6,21 +6,21 @@ import { authApi, endpoints } from "../configs/Api"
 export default function OrderList() {
 
     const [myOrder, setMyOrders] = useState([])
-    useEffect(() => {
-        const loadOrders = async () => {
+    // useEffect(() => {
+    //     const loadOrders = async () => {
 
-            const res = await authApi().get(endpoints['my-orders'])
-            setMyOrders(res.data)
+    //         const res = await authApi().get(endpoints['my-orders'])
+    //         setMyOrders(res.data)
 
-            console.log(res.data)
-            console.log(res.item)
-            console.log(myOrder)
+    //         console.log(res.data)
+    //         console.log(res.item)
+    //         console.log(myOrder)
 
-        }
+    //     }
 
-        loadOrders()
+    //     loadOrders()
 
-    }, [])
+    // }, [])
 
 
 

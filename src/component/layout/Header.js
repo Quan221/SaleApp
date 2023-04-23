@@ -47,19 +47,19 @@ function Header() {
 
     </>
 
-    // if (user.role == "Customer") {
+    if (user.roles[0] == "Admin") {
 
-    //   btn = <>
-    //     <div style={{ marginTop: '8px' }} > {user.username}</div>
-    //     <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
-    //     <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
-    //       <AiOutlineShopping />
-    //       <span className="cart-item-qty">{totalQuantities}</span>
-    //     </button>
+      btn = <>
+        <div style={{ marginTop: '8px' }} > {user.username}</div>
+        <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
+        </>
+        btn2=<>
+        <Link to='add-product' className='nav-link' > Thêm Sản Phẩm </Link>
+        </>
+    }
+    
 
-    //     {showCart && <CartItem />}
-
-    //   </>
+      
     //   btn2 = <>
     //     <Link to='/homepage' className='nav-link' >Trang chủ</Link>
     //     <Link to='/order' className='nav-link' >Đơn hàng của tôi</Link>
