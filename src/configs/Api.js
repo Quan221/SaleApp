@@ -25,6 +25,9 @@ export let endpoints = {
     "categories": "/Category/",
     "products": "/Product/",
     "products-detail": (productsId) => `/Product/${productsId}/`,
+    "add-order": "/Order/",
+    "my-order": "/Order/my-order/",
+
 
 
 }

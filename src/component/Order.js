@@ -6,21 +6,20 @@ import { authApi, endpoints } from "../configs/Api"
 export default function OrderList() {
 
     const [myOrder, setMyOrders] = useState([])
-    // useEffect(() => {
-    //     const loadOrders = async () => {
+    useEffect(() => {
+        const loadOrders = async () => {
 
-    //         const res = await authApi().get(endpoints['my-orders'])
-    //         setMyOrders(res.data)
+            const res = await authApi().get(endpoints['my-order'])
+            setMyOrders(res.data)
 
-    //         console.log(res.data)
-    //         console.log(res.item)
-    //         console.log(myOrder)
 
-    //     }
+            console.log(myOrder)
 
-    //     loadOrders()
+        }
 
-    // }, [])
+        loadOrders()
+
+    }, [])
 
 
 
@@ -44,19 +43,19 @@ export default function OrderList() {
                                     {/* <th>{c.status}</th> */}
                                 </tr>
                             </thead>
-                            {c.item.map(d => {
+                            {c.products.map(d => {
                                 {
-                                    a += d.sum
+                                    a += d.price
                                 }
                                 return (
                                     <tbody>
 
                                         <tr>
 
-                                            <td ><span>{d.product.name} </span></td>
+                                            <td ><span>{d.productName} </span></td>
                                             <td> x {d.quantity}</td>
 
-                                            <td>{d.sum} VNĐ</td>
+                                            <td>{d.price} VNĐ</td>
 
                                         </tr>
 
@@ -82,6 +81,7 @@ export default function OrderList() {
                             </tbody>
 
                         </Table>
+
                     </Container>
                 )
             })

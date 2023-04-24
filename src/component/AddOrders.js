@@ -15,34 +15,19 @@ export default function AddOrder() {
     const Addorders = () => {
         const place = document.getElementById('address').value
         let AddOder = async () => {
-            const formData = new FormData()
-            formData.append("ship_address", place)
+            const data2 = {
+                shipAddress: place,
+                paymentMethod: 0,
+                products: cartItems.map(c => ({ id: c.id, quantity: c.quantity }))
+            }
             try {
-                const res = await authApi().post(endpoints['addorder'], formData, {
+                const res = await authApi().post(endpoints['add-order'], data2, {
                     headers: {
-                        "Content-Type": "multipart/form-data"
+                        "Content-Type": "application/json"
                     }
                 })
 
-                cartItems.map(c => {
 
-                    let AddItem = async () => {
-                        const formData2 = new FormData()
-                        formData2.append("order", res.data.id)
-                        formData2.append("product", c.id)
-                        formData2.append("quantity", c.quantity)
-                        formData2.append("discount", 0)
-                        const res2 = await authApi().post(endpoints['additems'], formData2, {
-                            headers: {
-                                "Content-Type": "multipart/form-data"
-                            }
-                        })
-
-                    }
-                    AddItem()
-
-
-                })
 
             } catch (err) {
                 console.error(err)
@@ -51,7 +36,7 @@ export default function AddOrder() {
             setTotalQuantities(0)
             setTotalPrice(0)
 
-
+            console.log(data2)
         }
 
         AddOder()
