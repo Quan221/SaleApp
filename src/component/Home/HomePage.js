@@ -83,15 +83,8 @@ const HomePage = () => {
             })}
 
         </div></>
-
-
-    if (user != null && user.role == "Shipper") {
-        content = <></>
-    }
-
-    return (
-        <>
-            <div className="banner">
+    let banner = <>
+    <div className="banner">
                 <div className="mage" ><Image width={856} height={577} src={Banners} /></div>
                 <div className="banner-left" >
                     <div className="banner-group">
@@ -108,6 +101,50 @@ const HomePage = () => {
 
                 </div>
             </div>
+    </>
+
+
+    if (user != null && user.roles[0] == "Admin") {
+        content = <> <h1 bg="warning" className="text-center mt-5 .text-dark">Danh sách sản phẩm</h1>
+        <Container>
+            <div style={{ display: 'flex' }} >
+                {categories && categories.map(c => {
+                    return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={() => getCategories(c.id)} >{c.name}</Button>)
+                })}
+            </div>
+            <Form>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Control type="text" placeholder="Nhập tên sản phẩm" value={search} onChange={handleSearchInputChange} />
+                </Form.Group>
+                <Button variant="primary" onClick={handleSearchButtonClick}>Tìm kiếm</Button>
+            </Form>
+        </Container>
+        <Container >
+            <div style={{ textAlign: 'center' }} >
+                <AiOutlineDoubleLeft style={{ cursor: 'pointer' }} >
+
+                </AiOutlineDoubleLeft>
+
+
+                <AiOutlineDoubleRight style={{ cursor: 'pointer' }} >
+
+                </AiOutlineDoubleRight>
+            </div>
+
+        </Container>
+
+        <div className="item-container">
+            {products && products.map(c => {
+                return <ProductItem id={c.id} image={c['imageUrl']} name={c['name']} price={c.price} />
+            })}
+
+        </div></>
+        banner = <></>
+    }
+
+    return (
+        <>
+            {banner}
             {content}
 
         </>

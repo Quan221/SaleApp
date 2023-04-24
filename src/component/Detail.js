@@ -1,5 +1,5 @@
 import "../App.css"
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Image, } from "react-bootstrap";
 import { BsArrowLeft, IconName } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
@@ -10,11 +10,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Api, { authApi, endpoints } from "../configs/Api";
 import toast, { Toaster } from "react-hot-toast";
+import { UserContext } from "../App";
 
 const Detail = () => {
     const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
     const [detail, setDetail] = useState([])
     const { productsId } = useParams()
+    const [user, dispatch] = useContext(UserContext)
 
     useEffect(() => {
         const loadDetail = async () => {
@@ -32,6 +34,41 @@ const Detail = () => {
     }, [])
 
     const result = detail.price > 0 ? detail.price.toLocaleString('en-US') : '';
+
+
+    let sl = <>
+     <div className="quantity">
+                            <h4>Số lượng:</h4>
+                            <p className="quantity-desc">
+                                <span className="minus" onClick={decQty}><AiOutlineMinus /></span>
+                                <span className="num">{qty}</span>
+                                <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
+                            </p>
+                        </div>
+    
+    
+    </>
+    
+    let add = <>
+     <Button style={{ position: 'absolute', bottom: "10%", width: "392px", height: "48px" }} variant="success" onClick={() => onAdd(detail, qty)} className="nav-link text-white" >Thêm vào giỏ</Button>
+    
+    
+    </>
+
+
+if (user != null && user.roles[0] == "Admin") {
+    sl = <></>
+    add = <>
+
+         <Button style={{ position: 'absolute', bottom: "10%", width: "392px", height: "48px" }} variant="success"  className="nav-link text-white" >Change</Button>
+
+        
+    </>
+
+
+
+}
+
 
     return (
         <>
@@ -58,18 +95,11 @@ const Detail = () => {
                         <div>
                             <span className="content" >{detail.description}</span>
                         </div>
-                        <div className="quantity">
-                            <h4>Số lượng:</h4>
-                            <p className="quantity-desc">
-                                <span className="minus" onClick={decQty}><AiOutlineMinus /></span>
-                                <span className="num">{qty}</span>
-                                <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
-                            </p>
-                        </div>
+                        {sl}
                         <h3 className="mt-5">Đơn giá: <span> {result} VNĐ</span></h3>
 
 
-                        <Button style={{ position: 'absolute', bottom: "10%", width: "392px", height: "48px" }} variant="success" onClick={() => onAdd(detail, qty)} className="nav-link text-white" >Thêm vào giỏ</Button>
+                       {add}
 
 
                     </div>

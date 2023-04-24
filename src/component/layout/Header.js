@@ -52,14 +52,15 @@ function Header() {
       btn = <>
         <div style={{ marginTop: '8px' }} > {user.username}</div>
         <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
-        </>
-        btn2=<>
+      </>
+      btn2 = <>
         <Link to='add-product' className='nav-link' > Thêm Sản Phẩm </Link>
-        </>
+        <Link to='admin' className='nav-link' > Quan Ly SP</Link>
+      </>
     }
-    
 
-      
+
+
     //   btn2 = <>
     //     <Link to='/homepage' className='nav-link' >Trang chủ</Link>
     //     <Link to='/order' className='nav-link' >Đơn hàng của tôi</Link>
