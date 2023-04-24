@@ -16,6 +16,14 @@ const Update = () => {
     const [categories, setCategories] = useState([])
     const [price, setPrice] = useState()
     const [category, setCategory] = useState()
+    const nav = useNavigate()
+    const goToAdmin = (event) => {
+
+        {
+            nav(`/admin`)
+        }
+
+    }
 
 
 
@@ -24,6 +32,11 @@ const Update = () => {
         const loadProducts = async () => {
             let res = await Api.get((endpoints['products-detail'](productsId)))
             setProducts(res.data)
+            setName(res.data.name)
+            setDescripstion(res.data.description)
+            setTitle(res.data.title)
+            setPrice(res.data.price)
+            setCategory(res.data.category)
 
 
         }
@@ -41,19 +54,59 @@ const Update = () => {
     }, [])
     console.log(products.name)
 
+
+
+    const xoa = (event) => {
+        event.preventDefault()
+
+        let deleteProducts = async () => {
+
+
+
+            try {
+
+
+                await authApi().delete((endpoints['products-detail'](productsId)))
+
+
+
+            } catch (err) {
+                console.error(err)
+            }
+            // axios({
+            //     method : 'POST',
+            //     url: 'http://localhost:3000/register',
+            //     data :formData
+
+            // })
+            goToAdmin()
+
+        }
+
+        deleteProducts()
+
+    }
+
     return (
 
         <>
             <Container>
-                <h1 className="text-center text-success mt-5">Đăng ký người dùng</h1>
-                <Form >
+                <h3 class="mt-3 text-center text-primary text-uppercase">Chỉnh sửa bài viết</h3>
+                <div class="col-12 col-xl-auto mb-3">
+                    <a class="btn btn-sm btn-light text-primary" href=" ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left me-1"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Trở về Danh sách tin tức
+                    </a>
+                </div>
+
+                <Form  >
 
 
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Name<span class="text-danger">&#32;&#42;</span></Form.Label>
                         <Form.Control type="text" controlId='title'
 
-                            value={name} defaultValue={products.name}
+                            value={name}
                             onChange={(event) => setName(event.target.value)}
                         />
                     </Form.Group>
@@ -101,14 +154,23 @@ const Update = () => {
                     </Form.Group>
 
 
+                    <div style={{ display: 'flex' }}>
+                        <Button variant="success" type="submit" style={{ marginLeft: '300px', marginBottom: '40px' }} >
+                            Thay Đổi
+                        </Button>
+                        <Button variant="danger" style={{ marginLeft: '30px', marginBottom: '40px' }} onClick={xoa} >
+                            Xóa
+                        </Button>
 
-                    <Button variant="success" type="submit" style={{ marginLeft: '450px', marginBottom: '40px' }} >
-                        Đăng ký
-                    </Button>
-
+                    </div>
 
 
                 </Form>
+                <div style={{ display: 'flex' }}>
+
+                </div>
+
+
             </Container>
         </>
 

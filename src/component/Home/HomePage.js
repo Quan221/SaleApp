@@ -84,61 +84,31 @@ const HomePage = () => {
 
         </div></>
     let banner = <>
-    <div className="banner">
-                <div className="mage" ><Image width={856} height={577} src={Banners} /></div>
-                <div className="banner-left" >
-                    <div className="banner-group">
-                        <h1 className="h1-banner" >Your satisfaction is our pleasure</h1>
-                        <h2 className="h2-banner">2hr delivery promise</h2>
-                        <Form  >
-                            <Link to='/' className="nav-link">
+        <div className="banner">
+            <div className="mage" ><Image width={856} height={577} src={Banners} /></div>
+            <div className="banner-left" >
+                <div className="banner-group">
+                    <h1 className="h1-banner" >Your satisfaction is our pleasure</h1>
+                    <h2 className="h2-banner">2hr delivery promise</h2>
+                    <Form  >
+                        <Link to='/' className="nav-link">
 
-                            </Link>
+                        </Link>
 
-                        </Form>
-                    </div>
-
-
+                    </Form>
                 </div>
+
+
             </div>
+        </div>
     </>
 
 
     if (user != null && user.roles[0] == "Admin") {
-        content = <> <h1 bg="warning" className="text-center mt-5 .text-dark">Danh sách sản phẩm</h1>
-        <Container>
-            <div style={{ display: 'flex' }} >
-                {categories && categories.map(c => {
-                    return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={() => getCategories(c.id)} >{c.name}</Button>)
-                })}
-            </div>
-            <Form>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Control type="text" placeholder="Nhập tên sản phẩm" value={search} onChange={handleSearchInputChange} />
-                </Form.Group>
-                <Button variant="primary" onClick={handleSearchButtonClick}>Tìm kiếm</Button>
-            </Form>
-        </Container>
-        <Container >
-            <div style={{ textAlign: 'center' }} >
-                <AiOutlineDoubleLeft style={{ cursor: 'pointer' }} >
+        content = <>
 
-                </AiOutlineDoubleLeft>
-
-
-                <AiOutlineDoubleRight style={{ cursor: 'pointer' }} >
-
-                </AiOutlineDoubleRight>
-            </div>
-
-        </Container>
-
-        <div className="item-container">
-            {products && products.map(c => {
-                return <ProductItem id={c.id} image={c['imageUrl']} name={c['name']} price={c.price} />
-            })}
-
-        </div></>
+            <h1 style={{ textAlign: "center" }} >WELCOME BACK SIR</h1>
+        </>
         banner = <></>
     }
 

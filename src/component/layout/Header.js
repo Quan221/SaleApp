@@ -50,8 +50,18 @@ function Header() {
     if (user.roles[0] == "Admin") {
 
       btn = <>
-        <div style={{ marginTop: '8px' }} > {user.username}</div>
-        <Link to='/' onClick={logout} > <button className='btn-logout'  > Đăng xuất</button></Link>
+        <NavDropdown title={user.lastName} id="basic-nav-dropdown" style={{ marginLeft: "5%", height: '100%', width: "100%" }}>
+          <NavDropdown.Item >
+            <Link className="nav-link" > Bài Đăng Của Tôi</Link>
+          </NavDropdown.Item>
+          <NavDropdown.Item >
+            <Link className="nav-link"  > Viết Bài</Link>
+          </NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item >
+            <Link onClick={logout} > Đăng xuất</Link>
+          </NavDropdown.Item>
+        </NavDropdown>
       </>
       btn2 = <>
         <Link to='add-product' className='nav-link' > Thêm Sản Phẩm </Link>
