@@ -86,6 +86,37 @@ const Update = () => {
         deleteProducts()
 
     }
+    const sua = (event) => {
+        event.preventDefault()
+        let changeProduct = async () => {
+            const formData = new FormData()
+            formData.append("Name", name)
+            formData.append("Title", title)
+            formData.append("Description", description)
+            formData.append("Price", price)
+            formData.append("CategoryId", category)
+            formData.append("ImageFile", avatar.current.files[0])
+            try {
+
+
+                await authApi().patch((endpoints['products-detail'](productsId)), formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+
+                })
+
+
+
+            } catch (err) {
+                console.error(err)
+            }
+            goToAdmin()
+        }
+        changeProduct()
+
+
+    }
 
     return (
 
@@ -99,7 +130,7 @@ const Update = () => {
                     </a>
                 </div>
 
-                <Form  >
+                <Form onSubmit={sua} >
 
 
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

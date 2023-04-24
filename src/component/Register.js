@@ -26,20 +26,20 @@ export default function Register() {
         event.preventDefault()
 
         let registerUser = async () => {
-            const data = {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                password: password,
-                confirmPassword: confirmPassword
-              }
+            const formData = new FormData()
+            formData.append("firstName", firstName)
+            formData.append("lastName", lastName)
+            formData.append("email", email)
+            formData.append("password", password)
+            formData.append("confirmPassword", confirmPassword)
+            formData.append("ImageFile", avatar.current.files[0])
 
             try {
-                console.log(data)
 
-                await Apis.post(endpoints['register'], data, {
+
+                await Apis.post(endpoints['register'], formData, {
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "multipart/form-data"
                     }
 
                 })
