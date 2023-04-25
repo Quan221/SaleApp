@@ -32,7 +32,7 @@ export default function Register() {
             formData.append("email", email)
             formData.append("password", password)
             formData.append("confirmPassword", confirmPassword)
-            formData.append("ImageFile", avatar.current.files[0])
+            formData.append("avatar", avatar.current.files[0])
 
             try {
 

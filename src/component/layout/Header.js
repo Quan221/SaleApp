@@ -11,10 +11,15 @@ import styled from 'styled-components';
 import { AiOutlineShopping } from 'react-icons/ai';
 import { useStateContext } from '../../reducer/StateContext';
 import CartItem from '../CartItem';
+import { Image } from 'react-bootstrap';
 function Header() {
   const [user, dispatch] = useContext(UserContext)
   const [users, setUsers] = useState()
   const { showCart, setShowCart, totalQuantities } = useStateContext();
+
+
+  const isAdmin = user.roles.includes("Admin")
+  const isShipper = user.roles.includes("Shipper")
 
 
   let btn = <>
@@ -31,8 +36,19 @@ function Header() {
   }
   if (user != null) {
     btn = <>
-      <div style={{ marginTop: '8px' }} > {user.username}</div>
-      <Link to='/' onClick={logout} > <button className='btn-logout'> Đăng xuất</button></Link>
+      <Image src={user.avatar} alt="Avatar" style={{ verticalAlign: 'middle', width: '50px', height: '50px', borderRadius: '50%' }} />
+      <NavDropdown title={user.lastName} id="basic-nav-dropdown" style={{ marginLeft: "5%", height: '100%', width: "100%" }}>
+        <NavDropdown.Item >
+          <Link className="nav-link" > Bài Đăng Của Tôi</Link>
+        </NavDropdown.Item>
+        <NavDropdown.Item >
+          <Link className="nav-link"  > Viết Bài</Link>
+        </NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item >
+          <Link to='/' onClick={logout} > Đăng xuất</Link>
+        </NavDropdown.Item>
+      </NavDropdown>
       <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
         <AiOutlineShopping />
         <span className="cart-item-qty">{totalQuantities}</span>
@@ -47,10 +63,10 @@ function Header() {
 
     </>
 
-    if (user.roles[0] == "Admin") {
+    if (isAdmin) {
 
       btn = <>
-        <img src={user.avatar} alt="Avatar" style={{ verticalAlign: 'middle', width: '50px', height: '50px', borderRadius: '50%' }} />
+        <Image src={user.avatar} alt="Avatar" style={{ verticalAlign: 'middle', width: '50px', height: '50px', borderRadius: '50%' }} />
         <NavDropdown title={user.lastName} id="basic-nav-dropdown" style={{ marginLeft: "5%", height: '100%', width: "100%" }}>
           <NavDropdown.Item >
             <Link className="nav-link" > Bài Đăng Của Tôi</Link>
@@ -72,10 +88,26 @@ function Header() {
         <Link to='/register-shipper' className='nav-link' > Đăng Ký Shipper </Link>
       </>
     }
-    else if (user.roles[0] == "Shipper") {
+    else if (isShipper) {
       btn2 = <>
         <Link to="/shipper" className='nav-link' > Đơn Hàng </Link>
         <Link to="/shipper-list" className='nav-link' > Đơn đã nhận</Link>
+      </>
+      btn = <>
+        <Image src={user.avatar} alt="Avatar" style={{ verticalAlign: 'middle', width: '50px', height: '50px', borderRadius: '50%' }} />
+        <NavDropdown title={user.lastName} id="basic-nav-dropdown" style={{ marginLeft: "5%", height: '100%', width: "100%" }}>
+          <NavDropdown.Item >
+            <Link className="nav-link" > Bài Đăng Của Tôi</Link>
+          </NavDropdown.Item>
+          <NavDropdown.Item >
+            <Link className="nav-link"  > Viết Bài</Link>
+          </NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item >
+            <Link to='/' onClick={logout} > Đăng xuất</Link>
+          </NavDropdown.Item>
+        </NavDropdown>
+
       </>
     }
 
