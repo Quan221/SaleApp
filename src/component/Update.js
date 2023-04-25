@@ -122,18 +122,18 @@ const Update = () => {
 
         <>
             <Container>
-                <h3 class="mt-3 text-center text-primary text-uppercase">Chỉnh sửa bài viết</h3>
+                <h3 class="mt-3 text-center text-primary text-uppercase"></h3>
                 <div class="col-12 col-xl-auto mb-3">
 
                     <Link to="/admin" > <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left me-1"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                        Trở về Danh sách tin tức</Link>
+                        Trở về </Link>
                 </div>
 
                 <Form onSubmit={sua} >
 
 
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Name<span class="text-danger">&#32;&#42;</span></Form.Label>
+                        <Form.Label>Name<span class="text-danger">&#32; &#42; </span></Form.Label>
                         <Form.Control type="text" controlId='title'
 
                             value={name}
@@ -141,7 +141,7 @@ const Update = () => {
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Price<span class="text-danger">&#32;&#42;</span></Form.Label>
+                        <Form.Label>Price<span class="text-danger">&#32; &#42; </span></Form.Label>
                         <Form.Control type="text" controlId='title'
 
                             value={price} defaultValue={products.price}
@@ -149,7 +149,7 @@ const Update = () => {
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput12">
-                        <Form.Label>Description<span class="text-danger">&#32;&#42;</span></Form.Label>
+                        <Form.Label>Description<span class="text-danger">&#32; &#42; </span></Form.Label>
                         <Form.Control type="text" controlId='title'
 
                             value={description} defaultValue={products.description}
@@ -157,7 +157,7 @@ const Update = () => {
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput13">
-                        <Form.Label>Title<span class="text-danger">&#32;&#42;</span></Form.Label>
+                        <Form.Label>Title<span class="text-danger">&#32; &#42; </span></Form.Label>
                         <Form.Control type="text" controlId='title'
 
                             value={title} defaultValue={products.title}

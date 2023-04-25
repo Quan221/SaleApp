@@ -11,18 +11,22 @@ import axios from "axios"
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai"
 const HomePage = () => {
     const [user, dispatch] = useContext(UserContext)
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState({})
     const [categories, setCategories] = useState([])
     const [cateId, setCateId] = useState()
     const [search, setSearch] = useState('')
+    const [pageNumber, setPageNumber] = useState(1)
+    const [pageSize, setPageSize] = useState(6);
 
     useEffect(() => {
         const loadProducts = async () => {
-            const res = await authApi().get(endpoints['products'], { params: { cateId, search } })
+            const res = await authApi().get(endpoints['products'], { params: { cateId, search, pageSize, pageNumber } })
+            console.log(res.data)
+            // setProducts(res.data.items)
             setProducts(res.data)
         }
         loadProducts()
-    }, [cateId, search])
+    }, [cateId, search, pageSize, pageNumber])
 
 
     useEffect(() => {
@@ -49,15 +53,16 @@ const HomePage = () => {
         setSearch(search);
     }
     let content = <>
-        <h1 bg="warning" className="text-center mt-5 .text-dark">Danh sách sản phẩm</h1>
+        {/* <h1 bg="warning" className="text-center mt-5 .text-dark">Danh sách sản phẩm</h1> */}
         <Container>
             <div style={{ display: 'flex' }} >
+                <Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={() => getCategories(null)} >Tất cả</Button>
                 {categories && categories.map(c => {
                     return (<Button style={{ width: '150px', borderRadius: '20px', marginLeft: '10px' }} onClick={() => getCategories(c.id)} >{c.name}</Button>)
                 })}
             </div>
             <Form>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formBasicEmail" className="mt-5">
                     <Form.Control type="text" placeholder="Nhập tên sản phẩm" value={search} onChange={handleSearchInputChange} />
                 </Form.Group>
                 <Button variant="primary" onClick={handleSearchButtonClick}>Tìm kiếm</Button>
@@ -65,12 +70,15 @@ const HomePage = () => {
         </Container>
         <Container >
             <div style={{ textAlign: 'center' }} >
-                <AiOutlineDoubleLeft style={{ cursor: 'pointer' }} >
+                {products.pageNumber && products.totalPages &&
+                    <div>{products.pageNumber} of {products.totalPages} page</div>
+                }
+                <AiOutlineDoubleLeft style={{ cursor: 'pointer' }} onClick={() => setPageNumber(pageNumber > 1 ? pageNumber - 1 : pageNumber)}>
 
                 </AiOutlineDoubleLeft>
 
 
-                <AiOutlineDoubleRight style={{ cursor: 'pointer' }} >
+                <AiOutlineDoubleRight style={{ cursor: 'pointer' }} onClick={() => setPageNumber(pageNumber < products.totalPages ? pageNumber + 1 : pageNumber)}>
 
                 </AiOutlineDoubleRight>
             </div>
@@ -78,7 +86,7 @@ const HomePage = () => {
         </Container>
 
         <div className="item-container">
-            {products && products.map(c => {
+            {products.items && products.items.map(c => {
                 return <ProductItem id={c.id} image={c['imageUrl']} name={c['name']} price={c.price} />
             })}
 
