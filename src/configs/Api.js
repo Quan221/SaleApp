@@ -27,6 +27,12 @@ export let endpoints = {
     "products-detail": (productsId) => `/Product/${productsId}/`,
     "add-order": "/Order/",
     "my-order": "/Order/my-order/",
+    "list-order": "/Order/waiting/",
+    "changeStatus": (orderId) => `/Order/${orderId}/pick-up/`,
+    "changeStatusShip": (orderId) => `/Order/${orderId}/mark-complete/`,
+    "register-shipper": "/User/register-shipper/",
+    "order-admin": "/Order/admin/",
+
 
 
 

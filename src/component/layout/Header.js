@@ -50,6 +50,7 @@ function Header() {
     if (user.roles[0] == "Admin") {
 
       btn = <>
+        <img src={user.avatar} alt="Avatar" style={{ verticalAlign: 'middle', width: '50px', height: '50px', borderRadius: '50%' }} />
         <NavDropdown title={user.lastName} id="basic-nav-dropdown" style={{ marginLeft: "5%", height: '100%', width: "100%" }}>
           <NavDropdown.Item >
             <Link className="nav-link" > Bài Đăng Của Tôi</Link>
@@ -59,16 +60,24 @@ function Header() {
           </NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item >
-            <Link onClick={logout} > Đăng xuất</Link>
+            <Link to='/' onClick={logout} > Đăng xuất</Link>
           </NavDropdown.Item>
         </NavDropdown>
       </>
       btn2 = <>
-        <Link to='add-product' className='nav-link' > Thêm Sản Phẩm </Link>
-        <Link to='admin' className='nav-link' > Quan Ly SP</Link>
+        <Link to='/add-product' className='nav-link' > Thêm Sản Phẩm </Link>
+        <Link to='/admin' className='nav-link' > Quan Ly SP</Link>
+        <Link to='/order-admin' className='nav-link' > Quản Lý Đơn Hàng</Link>
+
+        <Link to='/register-shipper' className='nav-link' > Đăng Ký Shipper </Link>
       </>
     }
-
+    else if (user.roles[0] == "Shipper") {
+      btn2 = <>
+        <Link to="/shipper" className='nav-link' > Đơn Hàng </Link>
+        <Link to="/shipper-list" className='nav-link' > Đơn đã nhận</Link>
+      </>
+    }
 
 
     //   btn2 = <>

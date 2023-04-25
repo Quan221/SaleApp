@@ -108,6 +108,7 @@ const HomePage = () => {
         content = <>
 
             <h1 style={{ textAlign: "center" }} >WELCOME BACK SIR</h1>
+
         </>
         banner = <></>
     }

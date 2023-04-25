@@ -12,7 +12,6 @@ import Detail from './component/Detail';
 import HomePage from './component/Home/HomePage';
 import Category from './component/Category';
 import Register from './component/Register';
-import RegisterShiper from './component/shipper';
 import { StateContext } from './reducer/StateContext';
 import AddOrders from './component/AddOrders';
 import OrderList from './component/Order';
@@ -21,6 +20,9 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import AddProduct from './component/AddProduct';
 import Admin from './component/Admin';
 import Update from './component/Update';
+import ShipperList from './component/ShipperList';
+import RegisterShipper from './component/RegisterShipper';
+import OrderAdmin from './component/OrderAdmin';
 
 export const UserContext = createContext()
 
@@ -73,6 +75,9 @@ function App() {
             <Route path='/add-product' element={<AddProduct />} />
             <Route path='/admin' element={<Admin />} />
             <Route path='/update/:productsId/' element={<Update />} />
+            <Route path='/shipper-list' element={<ShipperList />} />
+            <Route path='/register-shipper' element={<RegisterShipper />} />
+            <Route path='/order-admin' element={<OrderAdmin />} />
 
 
           </Routes>

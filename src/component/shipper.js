@@ -13,14 +13,14 @@ export default function Shipper() {
     const loadOrders = async () => {
 
 
-      const res = await authApi().get(endpoints['list-orders'])
+      const res = await authApi().get(endpoints['list-order'])
       setOrders(res.data)
       console.log(res.data)
       console.log(orders)
     }
 
     loadOrders()
-  }, [orders])
+  }, [])
 
 
 
@@ -35,7 +35,7 @@ export default function Shipper() {
         </thead>
         {orders.map(c => {
 
-          return <Desk id={c.id} orderid={c.id} address={c.ship_address} status={c.status} />
+          return <Desk id={c.id} orderid={c.id} address={c.shipAddress} status={c.status} />
         })
 
         }
@@ -56,21 +56,21 @@ function Desk(props) {
 
 
     event.preventDefault()
-    let res = await authApi().post((endpoints['changeStatus'])(props.orderid), {
+    let res = await authApi().patch((endpoints['changeStatus'])(props.orderid), {
     })
-    { nav(`/shipper`) }
+    { nav(`/homepage`) }
     toast.success('Successfully!')
 
   }
-  if (props.status == "ToReceive")
+  if (props.status == "WaitingShipper")
     return (
 
       <tbody>
 
         <tr>
-          <td>{props.id}</td>
+          <td>{props.orderid}</td>
           <td colSpan={3}>{props.address}</td>
-          <td><Button size="sm" variant="success " style={{ width: "100px", margin: '0', }} onClick={changeStatus} >Xac Nhan</Button> </td>
+          <td><Button size="sm" variant="success " style={{ width: "100px", margin: '0', }} onClick={changeStatus} >Nhận Đơn</Button> </td>
         </tr>
 
       </tbody>
